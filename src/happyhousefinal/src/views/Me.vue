@@ -28,19 +28,19 @@
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">이메일</b-col
-              ><b-col cols="4" align-self="start">{{ user.email }}</b-col>
+              ><b-col cols="4" align-self="start">{{ user.useremail }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">주속</b-col
-              ><b-col cols="4" align-self="start">{{ user.address }}</b-col>
+              ><b-col cols="4" align-self="start">{{ user.useraddress }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">가입일</b-col
-              ><b-col cols="4" align-self="start">{{ user.joindate }}</b-col>
+              ><b-col cols="4" align-self="start">{{ user.userjoindate }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
           </b-container>
