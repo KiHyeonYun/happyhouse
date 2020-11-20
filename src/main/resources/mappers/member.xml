@@ -5,20 +5,20 @@
 <mapper namespace="com.ssafy.happyhouse.mapper.MemberMapper">
 
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
-		select userid, username, useraddress, userjoindate
+		select userid, username, useraddress, userjoindate,useremail
 		from member
 		where userid = #{userid} and userpwd = #{userpwd}
 	</select>
 
 	<!-- 회원 등록  -->
 	<insert id="regist" parameterType="MemberDto">
-		insert into member (userid, userpwd, username, useraddress)
-		values(#{userid},#{userpwd},#{username},#{useraddress})
+		insert into member (userid, userpwd, username, useraddress,useremail)
+		values(#{userid},#{userpwd},#{username},#{useraddress},#{useremail})
 	</insert>
 	
 	<!-- 회원 정보 읽기 --> 
 	<select id="read" parameterType="string" resultType="MemberDto">
-		select userid, userpwd, username, useraddress, userjoindate
+		select userid, userpwd, username, useraddress, userjoindate,useremail
 		from member
 		where userid = #{userid}
 	</select>
@@ -29,6 +29,7 @@
 		   set userpwd = #{userpwd}, 
 		   	   username = #{username},
 		   	   useraddress = #{useraddress}
+		   	   useremail=#{useremail}
 		 where userid = #{userid}
 	</update>
 	
