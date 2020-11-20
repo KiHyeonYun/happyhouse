@@ -1,58 +1,66 @@
 package com.ssafy.happyhouse.model;
 
 public class MemberDto {
-	private String member_id;
-	private String member_pw;
-	private String member_name;
-	private String member_address;
-	private String member_joindate;
-	
-	public MemberDto() {	}
-
-	public MemberDto(String member_id, String member_pw, String member_name, String member_address,
-			String member_joindate) {
+	private String userid;
+	private String userpwd;
+	private String username;
+	private String useraddress;
+	private String userjoindate;
+	private String useremail;
+	public MemberDto() {
 		super();
-		this.member_id = member_id;
-		this.member_pw = member_pw;
-		this.member_name = member_name;
-		this.member_address = member_address;
-		this.member_joindate = member_joindate;
+		// TODO Auto-generated constructor stub
 	}
-
+	public MemberDto(String userid, String userpwd, String username, String useraddress, String userjoindate,
+			String useremail) {
+		super();
+		this.userid = userid;
+		this.userpwd = userpwd;
+		this.username = username;
+		this.useraddress = useraddress;
+		this.userjoindate = userjoindate;
+		this.useremail = useremail;
+	}
 	@Override
 	public String toString() {
-		return "MemberDto [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
-				+ ", member_address=" + member_address + ", member_joindate=" + member_joindate + "]";
+		return "MemberDto [userid=" + userid + ", userpwd=" + userpwd + ", username=" + username + ", useraddress="
+				+ useraddress + ", userjoindate=" + userjoindate + ", useremail=" + useremail + "]";
 	}
-	
-	public String getMember_id() {
-		return member_id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getMember_pw() {
-		return member_pw;
+	public String getUserpwd() {
+		return userpwd;
 	}
-	public void setMember_pw(String member_pw) {
-		this.member_pw = member_pw;
+	public void setUserpwd(String userpwd) {
+		this.userpwd = userpwd;
 	}
-	public String getMember_name() {
-		return member_name;
+	public String getUsername() {
+		return username;
 	}
-	public void setMember_name(String member_name) {
-		this.member_name = member_name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getMember_address() {
-		return member_address;
+	public String getUseraddress() {
+		return useraddress;
 	}
-	public void setMember_address(String member_address) {
-		this.member_address = member_address;
+	public void setUseraddress(String useraddress) {
+		this.useraddress = useraddress;
 	}
-	public String getMember_joindate() {
-		return member_joindate;
+	public String getUserjoindate() {
+		return userjoindate;
 	}
-	public void setMember_joindate(String member_joindate) {
-		this.member_joindate = member_joindate;
+	public void setUserjoindate(String userjoindate) {
+		this.userjoindate = userjoindate;
 	}
+	public String getUseremail() {
+		return useremail;
+	}
+	public void setUseremail(String useremail) {
+		this.useremail = useremail;
+	}
+		
 }

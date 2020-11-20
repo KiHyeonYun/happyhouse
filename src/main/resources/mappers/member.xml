@@ -5,37 +5,37 @@
 <mapper namespace="com.ssafy.happyhouse.mapper.MemberMapper">
 
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
-		select member_id, member_name, member_address, member_joindate
+		select userid, username, useraddress, userjoindate
 		from member
-		where member_id = #{member_id} and member_pw = #{member_pw}
+		where userid = #{userid} and userpwd = #{userpwd}
 	</select>
 
 	<!-- 회원 등록  -->
 	<insert id="regist" parameterType="MemberDto">
-		insert into member (member_id, member_pw, member_name, member_address)
-		values(#{member_id},#{member_pw},#{member_name},#{member_address})
+		insert into member (userid, userpwd, username, useraddress)
+		values(#{userid},#{userpwd},#{username},#{useraddress})
 	</insert>
 	
 	<!-- 회원 정보 읽기 --> 
 	<select id="read" parameterType="string" resultType="MemberDto">
-		select member_id, member_pw, member_name, member_address, member_joindate
+		select userid, userpwd, username, useraddress, userjoindate
 		from member
-		where member_id = #{member_id}
+		where userid = #{userid}
 	</select>
 	
 	<!-- 회원 정보 업데이트 -->
 	<update id="update" parameterType="MemberDto" >
 		update member 
-		   set member_pw = #{member_pw}, 
-		   	   member_name = #{member_name},
-		   	   member_address = #{member_address}
-		 where member_id = #{member_id}
+		   set userpwd = #{userpwd}, 
+		   	   username = #{username},
+		   	   useraddress = #{useraddress}
+		 where userid = #{userid}
 	</update>
 	
 	<!-- 회원 탈퇴  -->
 	<delete id="delete" parameterType="string">
 		delete from member 
-		where member_id = #{member_id}
+		where userid = #{userid}
 	</delete>
 	
 </mapper>
