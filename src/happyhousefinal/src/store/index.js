@@ -9,36 +9,36 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default new Vuex.Store({
   state: {
     accessToken: null,
-    member_id: "",
-    member_name: ""
+    userId: "",
+    userName: ""
   },
   getters: {
     getAccessToken(state) {
       return state.accessToken;
     },
-    getMemberId(state) {
-      return state.member_id;
+    getUserId(state) {
+      return state.userId;
     },
-    getMemberName(state) {
-      return state.member_name;
+    getUserName(state) {
+      return state.userName;
     }
   },
   mutations: {
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
-      state.member_id = payload["member_id"];
-      state.member_name = payload["member_name"];
+      state.userId = payload["user-id"];
+      state.userName = payload["user-name"];
     },
     LOGOUT(state) {
       state.accessToken = null;
-      state.member_id = "";
-      state.member_name = "";
+      state.userId = "";
+      state.userName = "";
     }
   },
   actions: {
-    LOGIN(context, member) {
+    LOGIN(context, user) {
       return axios
-        .post(`${SERVER_URL}/member/confirm/login`, member)
+        .post(`${SERVER_URL}/member/confirm/login`, user)
         .then((response) => {
           context.commit("LOGIN", response.data);
           axios.defaults.headers.common[

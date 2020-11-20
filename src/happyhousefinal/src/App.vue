@@ -22,9 +22,9 @@
             <b-nav-item
               ><b-avatar
                 variant="primary"
-                v-text="getMemberId.charAt(0).toUpperCase()"
+                v-text="getUserId.charAt(0).toUpperCase()"
               ></b-avatar
-              >{{ getMemberName }}({{ getMemberId }})님 환영합니다.</b-nav-item
+              >{{ getUserName }}({{ getUserId }})님 환영합니다.</b-nav-item
             >
             <b-nav-item
               ><router-link to="/me">내정보보기</router-link></b-nav-item
@@ -70,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getAccessToken", "getMemberId", "getMemberName"])
+    ...mapGetters(["getAccessToken", "getUserId", "getUserName"])
   },
   methods: {
     onClickLogout() {

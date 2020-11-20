@@ -10,32 +10,30 @@
           align="left"
         >
           <b-form>
-            <b-form-group label="아이디:" label-for="member_id">
+            <b-form-group label="아이디:" label-for="userid">
               <b-form-input
-                id="member_id"
-                v-model="member.member_id"
+                id="userid"
+                v-model="user.userid"
                 required
                 placeholder="아이디 입력...."
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="비밀번호:" label-for="member_pw">
+            <b-form-group label="비밀번호:" label-for="userpwd">
               <b-form-input
                 type="password"
-                id="member_pw"
-                v-model="member.member_pw"
+                id="userpwd"
+                v-model="user.userpwd"
                 required
                 placeholder="비밀번호 입력...."
                 @keypress.enter="login"
               ></b-form-input>
             </b-form-group>
-            <b-button type="submit" variant="primary" class="m-1" @click="login"
+            <b-button type="button" variant="primary" class="m-1" @click="login"
               >로그인</b-button
             >
             <b-button type="button" variant="success" class="m-1"
               >회원가입</b-button
             >
-             <p>{{member.member_id}}</p>
-            <p>{{member.member_pw}}</p>
           </b-form>
         </b-card>
       </b-col>
@@ -54,9 +52,9 @@ export default {
   name: "Login",
   data: function() {
     return {
-      member: {
-        member_id: "",
-        member_pw: ""
+      user: {
+        userid: "",
+        userpwd: ""
       },
       message: ""
     };
@@ -71,16 +69,9 @@ export default {
       // LOGIN 액션 실행
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
-        .dispatch("LOGIN", this.member)
-        .then(() => 
-        {
-          this.$router.replace(`/${this.nextRoute}`);
-          alert(this.member);
-        })
-        .catch(({ message }) => {
-          this.msg = message;
-          alert(this.msg);
-          });
+        .dispatch("LOGIN", this.user)
+        .then(() => this.$router.replace(`/${this.nextRoute}`))
+        .catch(({ message }) => (this.msg = message));
     }
   }
 };
