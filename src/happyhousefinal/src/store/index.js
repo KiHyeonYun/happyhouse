@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-
+import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userId: "",
     userName: ""
   },
+  plugins: [createPersistedState()],
   getters: {
     getAccessToken(state) {
       return state.accessToken;
@@ -51,5 +52,6 @@ export default new Vuex.Store({
       axios.defaults.headers.common["auth-token"] = undefined;
     }
   },
-  modules: {}
+  modules: {},
+  
 });
