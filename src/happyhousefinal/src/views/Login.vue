@@ -72,7 +72,11 @@ export default {
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
         .dispatch("LOGIN", this.member)
-        .then(() => this.$router.replace(`/${this.nextRoute}`))
+        .then(() => 
+        {
+          this.$router.replace(`/${this.nextRoute}`);
+          alert(this.member);
+        })
         .catch(({ message }) => {
           this.msg = message;
           alert(this.msg);
