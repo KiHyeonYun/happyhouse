@@ -3,6 +3,7 @@
 ## Project setup
 ```
 npm install
+
 ```
 
 ### Compiles and hot-reloads for development
@@ -19,6 +20,13 @@ npm run build
 ```
 npm run lint
 ```
+
+### if bootstrap-vue, axios error
+```
+npm install vue bootstrap-vue bootstrap
+npm install vue axios --save
+```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
