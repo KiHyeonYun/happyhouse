@@ -3,14 +3,8 @@
     <div>
       <b-navbar toggleable="lg" type="dark" variant="dark">
         <b-navbar-brand
-          ><router-link to="/"
-            ><img
-              src="@/assets/nav_logo.png"
-              class="d-inline-block align-middle"
-              width="60px"
-              alt="Kitten"
-            />
-            SSAFY</router-link
+          ><router-link to="/">
+            HappyHouse</router-link
           ></b-navbar-brand
         >
         <!-- <b-navbar-brand href="/">SSAFY</b-navbar-brand> -->
