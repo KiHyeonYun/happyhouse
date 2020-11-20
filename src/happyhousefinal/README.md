@@ -3,6 +3,8 @@
 ## Project setup
 ```
 npm install
+npm install vue bootstrap-vue bootstrap
+npm install vue axios --save
 ```
 
 ### Compiles and hot-reloads for development
