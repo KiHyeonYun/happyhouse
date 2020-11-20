@@ -29,7 +29,7 @@ public class HappyHouseDeajeon4YunKihyeonLeeSuminApplication implements WebMvcCo
 //        		.excludePathPatterns(Arrays.asList("/**"));// 모든경로
     }
 
-//    Interceptor를 이용해서 처리하므로 전역의 Corss Origin 처리를 해준다.
+//    Interceptor를 이용해서 처리하므로 전역의 Corss Origin 처리를 해준다.  
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
