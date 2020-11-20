@@ -25,7 +25,7 @@ public class HappyHouseDeajeon4YunKihyeonLeeSuminApplication implements WebMvcCo
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/member/**") // 기본 적용 경로
-                .excludePathPatterns(Arrays.asList("/member/confirm/**", "/board/list"));// 적용 제외 경로
+                .excludePathPatterns(Arrays.asList("/member/confirm/**","/member/regist", "/board/list"));// 적용 제외 경로
 //        		.excludePathPatterns(Arrays.asList("/**"));// 모든경로
     }
 

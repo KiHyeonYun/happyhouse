@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ssafy.happyhouse.help.NumberResult;
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.service.JwtService;
 import com.ssafy.happyhouse.service.MemberService;
@@ -87,4 +89,24 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	 @ApiOperation(value="회원등록을 합니다.",response=NumberResult.class)
+	 @PostMapping("/regist")
+	 public ResponseEntity<NumberResult> registCustomer(@RequestBody MemberDto dto) throws Exception{
+		 logger.info("회원등록"+new Date());
+		 logger.info("회원등록"+dto);
+		 boolean checkRegi = memberService.regist(dto);
+		 NumberResult nr=new NumberResult();
+		 nr.setCheck(checkRegi);
+		 nr.setName("regist");
+		 nr.setState("succ");
+		 logger.info("회원등록 checkRegi "+checkRegi);
+		 if(!checkRegi) {
+			 nr.setCheck(false);
+			 nr.setName("regist");
+			 nr.setState("fail");
+		return new ResponseEntity<NumberResult>(nr,HttpStatus.OK);
+		 }
+		return new ResponseEntity<NumberResult>(nr,HttpStatus.OK);
+		 
+	 }
 }
