@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import Join from "../views/Join.vue";
 import Me from "../views/Me.vue";
 import store from "../store";
 
@@ -37,7 +38,12 @@ const routes = [
     name: "Me",
     component: Me,
     beforeEnter: requireAuth()
-  }
+  },
+  {
+    path: "/join",
+    name: "Join",
+    component: Join
+  },
 ];
 
 const router = new VueRouter({
