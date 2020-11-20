@@ -32,10 +32,6 @@
 	
 	<root level="debug">
 		<appender-ref ref="CONSOLE" />
-<<<<<<< HEAD
 		<!-- <appender-ref ref="FILE" /> -->
-=======
-<!-- 		<appender-ref ref="FILE" /> -->
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
 	</root>
 </configuration>
