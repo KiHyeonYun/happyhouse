@@ -28,9 +28,9 @@
 		update member 
 		   set userpwd = #{userpwd}, 
 		   	   username = #{username},
-		   	   useraddress = #{useraddress}
-		   	   useremail=#{useremail}
-		 where userid = #{userid}
+		   	   useraddress = #{useraddress},
+		   	   useremail = #{useremail}
+		   	   where userid = #{userid}
 	</update>
 	
 	<!-- 회원 탈퇴  -->
