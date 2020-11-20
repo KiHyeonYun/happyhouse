@@ -10,6 +10,6 @@ public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
 	public int update(MemberDto memberDto);
 	public int delete(String id);
-	public MemberDto read(String id);
+	public MemberDto read(String userid);
 	public int regist(MemberDto memberDto);
 }

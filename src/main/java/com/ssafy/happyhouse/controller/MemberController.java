@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ssafy.happyhouse.help.NumberResult;
+import com.ssafy.happyhouse.help.BooleanResult;
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.service.JwtService;
 import com.ssafy.happyhouse.service.MemberService;
@@ -89,24 +89,56 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	 @ApiOperation(value="회원등록을 합니다.",response=NumberResult.class)
+	 @ApiOperation(value="회원등록을 합니다.",response=BooleanResult.class)
 	 @PostMapping("/regist")
-	 public ResponseEntity<NumberResult> registCustomer(@RequestBody MemberDto dto) throws Exception{
+	 public ResponseEntity<BooleanResult> registCustomer(@RequestBody MemberDto dto) throws Exception{
 		 logger.info("회원등록"+new Date());
 		 logger.info("회원등록"+dto);
 		 boolean checkRegi = memberService.regist(dto);
-		 NumberResult nr=new NumberResult();
-		 nr.setCheck(checkRegi);
-		 nr.setName("regist");
-		 nr.setState("succ");
+		 BooleanResult br=new BooleanResult();
+		 br.setCheck(checkRegi);
+		 br.setName("regist");
+		 br.setState("succ");
 		 logger.info("회원등록 checkRegi "+checkRegi);
 		 if(!checkRegi) {
-			 nr.setCheck(false);
-			 nr.setName("regist");
-			 nr.setState("fail");
-		return new ResponseEntity<NumberResult>(nr,HttpStatus.OK);
+			 br.setCheck(false);
+			 br.setName("regist");
+			 br.setState("fail");
+		return new ResponseEntity<BooleanResult>(br,HttpStatus.OK);
 		 }
-		return new ResponseEntity<NumberResult>(nr,HttpStatus.OK);
+		return new ResponseEntity<BooleanResult>(br,HttpStatus.OK);
 		 
+	 }
+	 @ApiOperation(value="회원의 정보를 업데이트합니다. 정보가 변경되면 자동(trigger)로 추가됩니다. ",response=BooleanResult.class)
+	 @PutMapping("/update")
+	 public ResponseEntity<BooleanResult> updateCustomer(@RequestBody MemberDto dto) throws Exception{
+		 logger.info("회원 정보 수정 "+new Date());
+		 logger.info("회원 정보 수정" +dto);
+		 boolean checkUpdate=memberService.update(dto);
+		 BooleanResult br=new BooleanResult();
+		 br.setCheck(checkUpdate);
+		 br.setName("update");
+		 br.setState("succ");
+		 if(!checkUpdate) {
+			 br.setCheck(false);
+			 br.setName("regist");
+			 br.setState("fail");
+			 
+			 return new ResponseEntity<BooleanResult>(HttpStatus.NO_CONTENT);
+		 }
+		return new ResponseEntity<BooleanResult>(br,HttpStatus.OK);
+		 
+	 }
+	 @ApiOperation(value="회원의 정보를 삭제합니다 (탈퇴)" ,response=BooleanResult.class)
+	@DeleteMapping("/delete")
+	 public ResponseEntity<BooleanResult>deleteCustomer(@RequestBody String userid) throws Exception{
+		 logger.info("회원 정보 삭제 !!!!"+new Date());
+		 logger.info("회원 정보 삭제 !!!!"+userid);
+		 boolean checkdelete=memberService.delete(userid);
+		 BooleanResult br=new BooleanResult();
+		 br.setCheck(checkdelete);
+		 br.setName("delete");
+		 br.setState("succ");
+		 return new ResponseEntity<BooleanResult>(br,HttpStatus.NO_CONTENT);
 	 }
 }

@@ -42,8 +42,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean delete(String id) throws Exception {
-		return sqlSession.getMapper(MemberMapper.class).delete(id) == 1;
+	public boolean delete(String userid) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).delete(userid) == 1;
 	}
 
 
