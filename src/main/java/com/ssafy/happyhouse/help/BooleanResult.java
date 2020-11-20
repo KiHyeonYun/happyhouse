@@ -1,14 +1,14 @@
 package com.ssafy.happyhouse.help;
 
-public class NumberResult {
+public class BooleanResult {
 
 	private String name;
 	private boolean check;
 	private String state ="true";
-	public NumberResult() {
+	public BooleanResult() {
 
 	}
-	public NumberResult(String name, boolean check, String state) {
+	public BooleanResult(String name, boolean check, String state) {
 		super();
 		this.name = name;
 		this.check = check;
