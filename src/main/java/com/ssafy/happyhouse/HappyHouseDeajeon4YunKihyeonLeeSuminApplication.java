@@ -25,8 +25,8 @@ public class HappyHouseDeajeon4YunKihyeonLeeSuminApplication implements WebMvcCo
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/member/**") // 기본 적용 경로
-                .excludePathPatterns(Arrays.asList("/member/confirm/**","/member/regist","/member/delete","/member/update", "/board/list"));// 적용 제외 경로
-//        		.excludePathPatterns(Arrays.asList("/**"));// 모든경로
+//                .excludePathPatterns(Arrays.asList("/member/confirm/**","/member/regist","/member/delete","/member/update", "/board/list"));// 적용 제외 경로
+        		.excludePathPatterns(Arrays.asList("/**"));// 모든경로
     }
 
 //    Interceptor를 이용해서 처리하므로 전역의 Corss Origin 처리를 해준다.  

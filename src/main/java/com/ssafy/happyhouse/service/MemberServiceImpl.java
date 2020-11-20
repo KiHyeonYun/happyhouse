@@ -32,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto read(String id) throws Exception {
-		return sqlSession.getMapper(MemberMapper.class).read(id);
+	public MemberDto read(String userid) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).read(userid);
 	}
 
 	@Override

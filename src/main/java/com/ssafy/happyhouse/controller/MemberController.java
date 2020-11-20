@@ -91,7 +91,7 @@ public class MemberController {
 	}
 	 @ApiOperation(value="회원등록을 합니다.",response=BooleanResult.class)
 	 @PostMapping("/regist")
-	 public ResponseEntity<BooleanResult> registCustomer(@RequestBody MemberDto dto) throws Exception{
+	 public ResponseEntity<BooleanResult> registMember(@RequestBody MemberDto dto) throws Exception{
 		 logger.info("회원등록"+new Date());
 		 logger.info("회원등록"+dto);
 		 boolean checkRegi = memberService.regist(dto);
@@ -111,7 +111,7 @@ public class MemberController {
 	 }
 	 @ApiOperation(value="회원의 정보를 업데이트합니다. 정보가 변경되면 자동(trigger)로 추가됩니다. ",response=BooleanResult.class)
 	 @PutMapping("/update")
-	 public ResponseEntity<BooleanResult> updateCustomer(@RequestBody MemberDto dto) throws Exception{
+	 public ResponseEntity<BooleanResult> updateMember(@RequestBody MemberDto dto) throws Exception{
 		 logger.info("회원 정보 수정 "+new Date());
 		 logger.info("회원 정보 수정" +dto);
 		 boolean checkUpdate=memberService.update(dto);
@@ -131,7 +131,7 @@ public class MemberController {
 	 }
 	 @ApiOperation(value="회원의 정보를 삭제합니다 (탈퇴)" ,response=BooleanResult.class)
 	@DeleteMapping("/delete")
-	 public ResponseEntity<BooleanResult>deleteCustomer(@RequestBody String userid) throws Exception{
+	 public ResponseEntity<BooleanResult>deleteMember(@RequestBody String userid) throws Exception{
 		 logger.info("회원 정보 삭제 !!!!"+new Date());
 		 logger.info("회원 정보 삭제 !!!!"+userid);
 		 boolean checkdelete=memberService.delete(userid);
@@ -139,6 +139,6 @@ public class MemberController {
 		 br.setCheck(checkdelete);
 		 br.setName("delete");
 		 br.setState("succ");
-		 return new ResponseEntity<BooleanResult>(br,HttpStatus.NO_CONTENT);
+		 return new ResponseEntity<BooleanResult>(br,HttpStatus.OK);
 	 }
 }
