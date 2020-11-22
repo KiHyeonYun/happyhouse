@@ -1,6 +1,7 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
+  <div class="q-pa-md" style="max-width: 400px; align: fixed-center;">
     <q-form @submit="login" @reset="onReset" class="q-gutter-md">
+      <h4><strong>Happy House</strong></h4>
       <q-input
         filled
         v-model="user.userid"
@@ -11,7 +12,7 @@
 
       <q-input
         filled
-        type="passowrd"
+        type="password"
         v-model="user.userpwd"
         label="your password"
         lazy-rules
@@ -56,8 +57,24 @@ export default {
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
         .dispatch("LOGIN", this.user)
-        .then(() => this.$router.replace(`/${this.nextRoute}`))
-        .catch(({ message }) => (this.msg = message));
+        .then(() => {
+          this.$router.replace(`/${this.nextRoute}`);
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "로그인 성공"
+          });
+        })
+        .catch(({ message }) => {
+          this.msg = message;
+          this.$q.notify({
+            color: "red-5",
+            textColor: "white",
+            icon: "warning",
+            message: this.msg
+          });
+        });
     },
     onReset: function() {
       this.userid = null;

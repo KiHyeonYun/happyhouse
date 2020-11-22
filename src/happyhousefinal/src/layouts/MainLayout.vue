@@ -11,13 +11,16 @@
           </q-avatar>
           Happy House
         </q-toolbar-title>
-      </q-toolbar>
 
-      <q-tabs align="left">
-        <q-route-tab to="/login" label="로그인 테스트" />
-        <q-route-tab to="/join" label="가입 테스트" />
-        <q-route-tab to="/map" label="지도 테스트" />
-      </q-tabs>
+        <q-btn-toggle
+          align="right"
+          v-model="model"
+          toggle-color="primary"
+          @click="login"
+          flat
+          :options="[{ label: '로그인', value: 'login' }]"
+        ></q-btn-toggle>
+      </q-toolbar>
     </q-header>
     <!-- 헤더 끝 -->
 
@@ -113,6 +116,11 @@ export default {
       left: false,
       essentialLinks: linksData
     };
+  },
+  methods: {
+    login() {
+      this.$router.push("/login");
+    }
   }
 };
 </script>
