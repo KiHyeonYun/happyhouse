@@ -58,7 +58,9 @@
 </template>
 
 <script>
-import EssentialLink from "components/EssentialLink.vue";
+import search from "components/map/search.vue";
+import detail from "components/map/detail.vue";
+import itemlist from "components/map/itemlist.vue";
 
 const linksData = [
   {
@@ -107,7 +109,7 @@ const linksData = [
 
 export default {
   name: "MainLayout",
-  components: { EssentialLink },
+  // components: { EssentialLink },
   data() {
     return {
       left: false,
