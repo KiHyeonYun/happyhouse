@@ -30,10 +30,20 @@
 </template>
 
 <script>
+import Axios from 'axios';
+let config = {
+  headers : {
+    "X-NCP-APIGW-API-KEY-ID" : process.env.NAVER_CLIENT_ID,
+    "X-NCP-APIGW-API-KEY" : process.env.NAVER_CLIENT_SECRET,
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json; charset = utf-8"
+  }
+}
 export default {
   name: "Map",
   data() {
     return {
+      geocodeurl : process.env.GEOCODE_URL,
       location: [
         { lat: 37, lng: 127 },
         { lat: 37, lng: 128 },
@@ -84,19 +94,14 @@ export default {
     },
     mapGeocode(item) {
       // Case geocode
-      this.$navers.naver.maps.Service.geocode({ query: item }, function(
-        status,
-        response
-      ) {
-        if (status === this.$navers.naver.maps.Service.Status.ERROR) {
-          return alert("Something wrong!");
-        }
-        console.log(response);
-      });
+      Axios.get(this.geocodeurl+item, config)
+      .then(Response => {
+        console.log(Response.data);
+      })
     }
   },
   mounted() {
-    this.mapGeocode("사직동 9번지");
+    this.mapGeocode("사직동 9");
     //setInterval(() => this.count++, 1000);
   }
 };

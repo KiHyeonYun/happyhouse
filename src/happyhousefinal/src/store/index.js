@@ -6,12 +6,11 @@ import naver from "vue-naver-maps";
 
 Vue.use(Vuex);
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-const MAP_URL = process.env.NAVER_MAP_KEY;
+const MAP_URL = process.env.NAVER_CLIENT_ID;
 
 Vue.use(naver, {
   clientID: MAP_URL,
   useGovAPI: false, //공공 클라우드 API 사용 (선택)
-  libraries: ["geocoder"],
   subModules: "" // 서브모듈 (선택)
 });
 /*
