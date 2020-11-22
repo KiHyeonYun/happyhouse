@@ -40,7 +40,9 @@
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">가입일</b-col
-              ><b-col cols="4" align-self="start">{{ user.userjoindate }}</b-col>
+              ><b-col cols="4" align-self="start">{{
+                user.userjoindate
+              }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
           </b-container>
@@ -53,13 +55,6 @@
       <b-col></b-col>
     </b-row>
   </b-container>
-  <!-- <h2>내정보보기</h2>
-    이름 : {{ user.username }}<br />
-    아이디 : {{ user.userid }}<br />
-    이메일 : {{ user.email }}<br />
-    주소 : {{ user.address }}<br />
-    가입일 : {{ user.joindate }}<br />
-  </div> -->
 </template>
 
 <script>
@@ -76,7 +71,7 @@ export default {
   created() {
     axios
       .get(`${SERVER_URL}/member/info`)
-      .then((response) => {
+      .then(response => {
         this.user = response.data.user;
       })
       .catch(() => {

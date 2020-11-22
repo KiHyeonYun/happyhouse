@@ -98,7 +98,7 @@ public class MemberController {
 		 BooleanResult br=new BooleanResult();
 		 br.setCheck(checkRegi);
 		 br.setName("regist");
-		 br.setState("succ");
+		 br.setState("success");
 		 logger.info("회원등록 checkRegi "+checkRegi);
 		 if(!checkRegi) {
 			 br.setCheck(false);
@@ -118,7 +118,7 @@ public class MemberController {
 		 BooleanResult br=new BooleanResult();
 		 br.setCheck(checkUpdate);
 		 br.setName("update");
-		 br.setState("succ");
+		 br.setState("success");
 		 if(!checkUpdate) {
 			 br.setCheck(false);
 			 br.setName("regist");
@@ -138,7 +138,7 @@ public class MemberController {
 		 BooleanResult br=new BooleanResult();
 		 br.setCheck(checkdelete);
 		 br.setName("delete");
-		 br.setState("succ");
+		 br.setState("success");
 		 return new ResponseEntity<BooleanResult>(br,HttpStatus.OK);
 	 }
 }

@@ -1,55 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import Join from "../views/Join.vue";
-import Me from "../views/Me.vue";
-import store from "../store";
+import routes from "./routes";
 
 Vue.use(VueRouter);
 
-// https://router.vuejs.org/kr/guide/advanced/navigation-guards.html
-const requireAuth = () => (to, from, next) => {
-  const nextRoute = to.path;
+/*
+ * If not building with SSR mode, you can
+ * directly export the Router instantiation;
+ *
+ * The function below can be async too; either use
+ * async/await or return a Promise which resolves
+ * with the Router instance.
+ */
 
-  if (store.getters.getAccessToken) {
-    return next();
-  } else next("/login" + nextRoute);
-};
+export default function(/* { store, ssrContext } */) {
+  const Router = new VueRouter({
+    scrollBehavior: () => ({ x: 0, y: 0 }),
+    routes,
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login
-  },
-  {
-    path: "/login/:nextRoute",
-    name: "LoginNextRoute",
-    component: Login
-  },
-  {
-    path: "/me",
-    name: "Me",
-    component: Me,
-    beforeEnter: requireAuth()
-  },
-  {
-    path: "/join",
-    name: "Join",
-    component: Join
-  },
-];
+    // Leave these as they are and change in quasar.conf.js instead!
+    // quasar.conf.js -> build -> vueRouterMode
+    // quasar.conf.js -> build -> publicPath
+    mode: process.env.VUE_ROUTER_MODE,
+    base: process.env.VUE_ROUTER_BASE
+  });
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
-});
-
-export default router;
+  return Router;
+}
