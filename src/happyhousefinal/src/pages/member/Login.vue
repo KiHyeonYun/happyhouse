@@ -1,36 +1,36 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px; align: fixed-center;">
-    <q-form @submit="login" @reset="onReset" class="q-gutter-md">
-      <h4><strong>Happy House</strong></h4>
-      <q-input
-        filled
-        v-model="user.userid"
-        label="Your id"
-        lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
-      />
-
-      <q-input
-        filled
-        type="password"
-        v-model="user.userpwd"
-        label="your password"
-        lazy-rules
-        :rules="[
-          val => (val !== null && val !== '') || 'Please type your password'
-        ]"
-      />
-      <div>
-        <q-btn label="로그인" type="submit" color="primary" />
-        <q-btn
-          label="초기화"
-          type="reset"
-          color="primary"
-          flat
-          class="q-ml-sm"
+  <div class="flex absolute-center	">
+    <div class="q-pa-md" style="max-width: 700px;">
+      <q-form @submit="login" @reset="onReset" class="q-gutter-md">
+        <h4><strong>Happy House</strong></h4>
+        <q-input
+          filled
+          v-model="user.userid"
+          label="Your id"
+          lazy-rules
+          :rules="[val => (val && val.length > 0) || 'Please type something']"
         />
-      </div>
-    </q-form>
+
+        <q-input
+          filled
+          type="password"
+          v-model="user.userpwd"
+          label="your password"
+          lazy-rules
+          :rules="[
+            val => (val !== null && val !== '') || 'Please type your password'
+          ]"
+        />
+        <div>
+          <q-btn label="로그인" type="submit" color="primary" />
+          <q-btn label="초기화" color="primary" flat class="q-ml-sm" />
+        </div>
+        <div>
+          <a color="inherit" href="#">아이디 찾기</a>
+          <a color="inherit" class="q-ml-sm" href="#">비밀번호 찾기</a>
+        </div>
+      </q-form>
+    </div>
   </div>
 </template>
 
