@@ -18,10 +18,6 @@ const routes = [
         component: () => import("pages/Index.vue")
       },
       {
-        path: "/login",
-        component: () => import("pages/member/Login.vue")
-      },
-      {
         path: "/mypage",
         component: () => import("pages/member/Mypage.vue"),
         beforeEnter: requireAuth()
@@ -48,6 +44,10 @@ const routes = [
   {
     path: "*",
     component: () => import("pages/Error404.vue")
+  },
+  {
+    path: "/login",
+    component: () => import("pages/member/Login.vue")
   }
 ];
 

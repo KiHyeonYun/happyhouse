@@ -13,7 +13,6 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
-    "dotenv": "^8.2.0",
     "quasar": "^1.0.0",
     "vue-naver-maps": "^0.14.1",
     "vue-router": "^3.4.9"
@@ -22,6 +21,7 @@
     "@quasar/app": "^2.0.0",
     "@quasar/quasar-app-extension-dotenv": "^1.0.5",
     "babel-eslint": "^10.0.1",
+    "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-loader": "^3.0.3",
