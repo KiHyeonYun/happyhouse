@@ -13,13 +13,29 @@
         </q-toolbar-title>
 
         <q-btn-toggle
+          v-if="!loginok"
           align="right"
           v-model="model"
-          toggle-color="primary"
-          @click="login"
+          toggle-color="info"
           flat
-          :options="[{ label: '로그인', value: 'login' }]"
+          :options="[
+            { label: '로그인', value: 'login', to: '/login' },
+            { label: '회원가입', value: 'join', to: '/join' }
+          ]"
         ></q-btn-toggle>
+
+        <q-btn v-else color="primary" label="회원님 반갑습니다.">
+          <q-menu transition-show="jump-down" transition-hide="jump-up">
+            <q-list style="min-width: 150px">
+              <q-item clickable @click="mypage">
+                <q-item-section>My page</q-item-section>
+              </q-item>
+              <q-item clickable @click="logout">
+                <q-item-section>로그아웃</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
     <!-- 헤더 끝 -->
@@ -27,14 +43,7 @@
     <!-- 왼쪽 사이드바 시작 -->
     <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
       <q-list>
-        <q-item-label header class="text-grey-8">
-          Memu
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item-label header class="text-grey-8"> </q-item-label>
       </q-list>
     </q-drawer>
     <!-- 왼쪽 사이드바 끝 -->
@@ -65,63 +74,36 @@ import search from "components/map/search.vue";
 import detail from "components/map/detail.vue";
 import itemlist from "components/map/itemlist.vue";
 
-const linksData = [
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev"
-  },
-  {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework"
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev"
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev"
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev"
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev"
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev"
-  }
-];
-
 export default {
   name: "MainLayout",
   // components: { EssentialLink },
   data() {
     return {
       left: false,
-      essentialLinks: linksData
+      model: null,
+      loginok: false
+      //essentialLinks: linksData
     };
+  },
+  mounted() {
+    this.logincheck();
   },
   methods: {
     login() {
       this.$router.push("/login");
+    },
+    logincheck() {
+      if (this.$store.state.accessToken != null) {
+        this.loginok = true;
+      } else {
+        this.loginok = false;
+      }
+    },
+    logout() {
+      this.$router.push("/");
+    },
+    mypage() {
+      this.$router.push("/mypage");
     }
   }
 };
