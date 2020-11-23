@@ -30,20 +30,13 @@
 </template>
 
 <script>
-import Axios from 'axios';
-let config = {
-  headers : {
-    "X-NCP-APIGW-API-KEY-ID" : process.env.NAVER_CLIENT_ID,
-    "X-NCP-APIGW-API-KEY" : process.env.NAVER_CLIENT_SECRET,
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json; charset = utf-8"
-  }
-}
+import Axios from "axios";
+
 export default {
   name: "Map",
   data() {
     return {
-      geocodeurl : process.env.GEOCODE_URL,
+      geocodeurl: process.env.GEOCODE_URL,
       location: [
         { lat: 37, lng: 127 },
         { lat: 37, lng: 128 },
@@ -93,11 +86,12 @@ export default {
       this.marker = vue.marker;
     },
     mapGeocode(item) {
-      // Case geocode
-      Axios.get(this.geocodeurl+item, config)
-      .then(Response => {
-        console.log(Response.data);
-      })
+      this.$navers.naver.maps.Service.geocode(
+        { query: "덕수궁길 15" },
+        function(status, response) {
+          console.log(response);
+        }
+      );
     }
   },
   mounted() {

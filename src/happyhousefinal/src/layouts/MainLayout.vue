@@ -15,14 +15,8 @@
         <q-btn-toggle
           v-if="!loginok"
           align="right"
-<<<<<<< HEAD
-          toggle-color="primary"
-          v-model="model"
-          @click="login"
-=======
           v-model="model"
           toggle-color="info"
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
           flat
           :options="[
             { label: '로그인', value: 'login', to: '/login' },
@@ -49,14 +43,7 @@
     <!-- 왼쪽 사이드바 시작 -->
     <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
       <q-list>
-<<<<<<< HEAD
-        <q-item-label header class="text-grey-8">
-          Memu
-        </q-item-label>
-        
-=======
         <q-item-label header class="text-grey-8"> </q-item-label>
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
       </q-list>
     </q-drawer>
     <!-- 왼쪽 사이드바 끝 -->
@@ -92,14 +79,10 @@ export default {
   // components: { EssentialLink },
   data() {
     return {
-      model : 'login',
-      left: false,
-<<<<<<< HEAD
-=======
       model: null,
+      left: false,
       loginok: false
       //essentialLinks: linksData
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
     };
   },
   mounted() {
