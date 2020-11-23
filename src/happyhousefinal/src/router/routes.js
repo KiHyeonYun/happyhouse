@@ -22,11 +22,7 @@ const routes = [
         component: () => import("pages/member/Mypage.vue"),
         beforeEnter: requireAuth()
       },
-      {
-        path: "/join",
-        name: "Join",
-        component: () => import("pages/member/join.vue")
-      },
+
       {
         path: "/map",
         name: "Map",
@@ -48,6 +44,11 @@ const routes = [
   {
     path: "/login",
     component: () => import("pages/member/Login.vue")
+  },
+  {
+    path: "/join",
+    name: "Join",
+    component: () => import("pages/member/join.vue")
   }
 ];
 
