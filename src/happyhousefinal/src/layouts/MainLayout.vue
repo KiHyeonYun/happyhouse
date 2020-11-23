@@ -1,22 +1,20 @@
 <template>
   <q-layout view="hHh lpR fff">
     <!-- header 시작 -->
-    <q-header reveal elevated class="bg-primary text-white" height-hint="98">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="left = !left" />
+    <q-header reveal elevated class="bg-white text-black" height-hint="98">
+      <q-toolbar style="padding-right:100px; padding-left:100px;">
+        <!-- <q-btn dense flat round icon="menu" @click="left = !left" /> -->
 
         <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
-          </q-avatar>
-          Happy House
+          <img src="~assets/login-logo.png" @click="f_main" width="200px" />
         </q-toolbar-title>
 
         <q-btn-toggle
+          class="gle"
           v-if="!loginok"
           align="right"
           v-model="model"
-          toggle-color="info"
+          toggle-color="black"
           flat
           :options="[
             { label: '로그인', value: 'login', to: '/login' },
@@ -41,11 +39,11 @@
     <!-- 헤더 끝 -->
 
     <!-- 왼쪽 사이드바 시작 -->
-    <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
+    <!-- <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
       <q-list>
         <q-item-label header class="text-grey-8"> </q-item-label>
       </q-list>
-    </q-drawer>
+    </q-drawer> -->
     <!-- 왼쪽 사이드바 끝 -->
 
     <!-- 중앙 child view 시작 -->
@@ -99,8 +97,10 @@ export default {
         this.loginok = false;
       }
     },
-    logout() {
-      this.$router.push("/");
+    f_main() {
+      alert("해피하우스에용~(ㅏ");
+      location.href = "/";
+      // this.$router.push("/");
     },
     mypage() {
       this.$router.push("/mypage");
@@ -108,3 +108,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+img:hover {
+  cursor: pointer;
+}
+.gle:hover {
+  color: aqua;
+}
+</style>

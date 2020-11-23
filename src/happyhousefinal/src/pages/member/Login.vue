@@ -1,33 +1,53 @@
 <template>
-  <div class="flex absolute-center	">
-    <div class="q-pa-md" style="max-width: 700px;">
+  <div class="flex absolute-center">
+    <div class="q-pa-md" style="width: 400px;">
       <q-form @submit="login" @reset="onReset" class="q-gutter-md">
-        <h4><strong>Happy House</strong></h4>
+        <img
+          src="~assets/login-logo.png"
+          @click="main"
+          width="300px"
+          style="margin-left:35px;"
+        />
         <q-input
+          outlined
           filled
           v-model="user.userid"
-          label="Your id"
+          label="   아이디"
           lazy-rules
           :rules="[val => (val && val.length > 0) || 'Please type something']"
         />
 
         <q-input
+          outlined
           filled
           type="password"
           v-model="user.userpwd"
-          label="your password"
+          label="   비밀번호"
           lazy-rules
           :rules="[
             val => (val !== null && val !== '') || 'Please type your password'
           ]"
         />
-        <div>
-          <q-btn label="로그인" type="submit" color="primary" />
-          <q-btn label="초기화" color="primary" flat class="q-ml-sm" />
+        <div style="text-align:center;">
+          <q-btn
+            label="로그인"
+            type="submit"
+            color="primary"
+            style="width: 130px;"
+          />
+          <q-btn
+            label="초기화"
+            type="reset"
+            color="primary"
+            class="q-ml-sm"
+            style="width: 130px;"
+          />
         </div>
-        <div>
-          <a color="inherit" href="#">아이디 찾기</a>
-          <a color="inherit" class="q-ml-sm" href="#">비밀번호 찾기</a>
+        <br />
+        <div style="text-align:center">
+          <a href="#">아이디 찾기</a>
+          <a class="q-ml-sm" href="#">비밀번호 찾기</a>
+          <a class="q-ml-sm" href="/join">회원가입</a>
         </div>
       </q-form>
     </div>
@@ -77,8 +97,11 @@ export default {
         });
     },
     onReset: function() {
-      this.userid = null;
-      this.userpwd = null;
+      this.user.userid = "";
+      this.user.userpwd = "";
+    },
+    main: function() {
+      this.$router.push("/");
     }
   }
 };
@@ -87,5 +110,17 @@ export default {
 <style scope>
 #login-div {
   text-align: center;
+}
+a:hover {
+  text-decoration: underline;
+  color: black;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+img:hover {
+  cursor: pointer;
 }
 </style>
