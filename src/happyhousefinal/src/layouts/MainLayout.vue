@@ -3,7 +3,6 @@
     <!-- header 시작 -->
     <q-header reveal elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="left = !left" />
 
         <q-toolbar-title>
           <q-avatar>
@@ -40,14 +39,6 @@
     </q-header>
     <!-- 헤더 끝 -->
 
-    <!-- 왼쪽 사이드바 시작 -->
-    <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
-      <q-list>
-        <q-item-label header class="text-grey-8"> </q-item-label>
-      </q-list>
-    </q-drawer>
-    <!-- 왼쪽 사이드바 끝 -->
-
     <!-- 중앙 child view 시작 -->
     <q-page-container>
       <router-view />
@@ -73,6 +64,8 @@
 import search from "components/map/search.vue";
 import detail from "components/map/detail.vue";
 import itemlist from "components/map/itemlist.vue";
+import Axios from 'axios';
+import routes from 'src/router/routes';
 
 export default {
   name: "MainLayout",
@@ -80,8 +73,7 @@ export default {
   data() {
     return {
       model: null,
-      left: false,
-      loginok: false
+      loginok: false,
       //essentialLinks: linksData
     };
   },
@@ -104,7 +96,7 @@ export default {
     },
     mypage() {
       this.$router.push("/mypage");
-    }
+    },
   }
 };
 </script>
