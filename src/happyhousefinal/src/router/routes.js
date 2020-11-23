@@ -30,7 +30,7 @@ const routes = [
       {
         path: "/map",
         name: "Map",
-        component: () => import("pages/map.vue")
+        component: () => import("pages/map.vue"),
       },
       {
         path: "/login/:nextRoute",
