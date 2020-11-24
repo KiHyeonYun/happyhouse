@@ -1,11 +1,13 @@
 import store from "../store";
-
+import { SessionStorage } from "quasar";
 const requireAuth = () => (to, from, next) => {
   const nextRoute = to.path;
 
-  if (store.getters.getAccessToken) {
+  if (!SessionStorage.isEmpty()) {
     return next();
-  } else next("/login" + nextRoute);
+  } else {
+    next("/login" + nextRoute);
+  }
 };
 
 const routes = [

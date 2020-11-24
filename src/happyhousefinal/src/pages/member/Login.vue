@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { SessionStorage } from "quasar";
+import axios from "axios";
 export default {
   name: "Login",
   data: function() {
@@ -74,27 +76,31 @@ export default {
   },
   methods: {
     login: function() {
-      // LOGIN 액션 실행
-      // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
-      this.$store
-        .dispatch("LOGIN", this.user)
-        .then(() => {
-          this.$router.replace(`/${this.nextRoute}`);
-          this.$q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: "로그인 성공"
-          });
-        })
-        .catch(({ message }) => {
-          this.msg = message;
-          this.$q.notify({
-            color: "red-5",
-            textColor: "white",
-            icon: "warning",
-            message: "로그인 실패"
-          });
+      axios
+        .post(
+          process.env.VUE_APP_SERVER_URL + "/member/confirm/login",
+          this.user
+        )
+        .then(response => {
+          if (response.data["status"] == "success") {
+            SessionStorage.set("accessToken", `${response.data["auth-token"]}`);
+            SessionStorage.set("userId", `${response.data["user-id"]}`);
+            SessionStorage.set("userName", `${response.data["user-name"]}`);
+            this.$q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "로그인 성공"
+            });
+            this.$router.push("/");
+          } else {
+            this.$q.notify({
+              color: "red-5",
+              textColor: "white",
+              icon: "warning",
+              message: "로그인 실패"
+            });
+          }
         });
     },
     onReset: function() {

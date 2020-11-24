@@ -9,24 +9,32 @@
           <img src="~assets/login-logo.png" @click="f_main" width="200px" />
         </q-toolbar-title>
 
+        <div v-if="!loginok">
+          <q-btn
+            class="hver"
+            @click="login"
+            flat
+            text-color="#666666"
+            label="로그인"
+            style="font-weight:800;"
+          ></q-btn>
+          |
+          <q-btn
+            class="hver"
+            flat
+            @click="join"
+            text-color="#666666"
+            label="회원가입"
+            style="font-weight:800;"
+          ></q-btn>
+        </div>
         <q-btn
-          class="hver"
-          v-if="!loginok"
-          @click="login"
+          v-else
+          color="primary"
           flat
-          text-color="#666666"
-          label="로그인"
-        ></q-btn>
-        |
-        <q-btn
-          class="hver"
-          v-if="!loginok"
-          flat
-          @click="join"
-          text-color="#666666"
-          label="회원가입"
-        ></q-btn>
-        <q-btn v-else color="primary" label="회원님 반갑습니다.">
+          :label="nim"
+          style="font-weight:700;"
+        >
           <q-menu transition-show="jump-down" transition-hide="jump-up">
             <q-list style="min-width: 150px">
               <q-item clickable @click="mypage">
@@ -74,6 +82,7 @@
 <script>
 import axios from "axios";
 import routes from "src/router/routes";
+import { SessionStorage } from "quasar";
 
 export default {
   name: "MainLayout",
@@ -81,7 +90,12 @@ export default {
   data() {
     return {
       model: null,
-      loginok: false
+      loginok: false,
+      nim:
+        SessionStorage.getItem("userId") +
+        "(" +
+        SessionStorage.getItem("userName") +
+        ")님 환영합니다."
       //essentialLinks: linksData
     };
   },
@@ -96,21 +110,25 @@ export default {
       this.$router.push("/join");
     },
     logincheck() {
-      if (this.$store.state.accessToken != null) {
+      if (!SessionStorage.isEmpty()) {
         this.loginok = true;
       } else {
         this.loginok = false;
       }
     },
     f_main() {
-      alert("해피하우스에용~(ㅏ");
+      alert("해피하우스에용~:->");
       location.href = "/";
       // this.$router.push("/");
     },
     mypage() {
       this.$router.push("/mypage");
     },
-    logout() {}
+    logout() {
+      SessionStorage.clear();
+      this.loginok = false;
+      location.href = "/";
+    }
   }
 };
 </script>
