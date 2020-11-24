@@ -16,6 +16,7 @@
         style="width:350px; margin : auto"
       >
         <h6><strong>회원가입</strong></h6>
+
         <!-- 회원가입 폼 시작 -->
         <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
           <q-input
@@ -209,7 +210,7 @@
 </template>
 
 <script>
-import Axios from "axios";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -235,10 +236,8 @@ export default {
           message: "가입 동의가 필요합니다."
         });
       } else {
-        Axios.post(
-          process.env.VUE_APP_SERVER_URL + "/member/regist",
-          this.member
-        )
+        axios
+          .post(process.env.VUE_APP_SERVER_URL + "/member/regist", this.member)
           .then(Response => {
             alert(Response.data);
             if (Response.data.state == "success") {

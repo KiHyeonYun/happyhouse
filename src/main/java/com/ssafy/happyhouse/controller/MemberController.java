@@ -53,7 +53,7 @@ public class MemberController {
 				resultMap.put("auth-token", token);
 				resultMap.put("user-id", loginMember.getUserid());
 				resultMap.put("user-name", loginMember.getUsername());
-//				resultMap.put("status", true);
+			resultMap.put("status", "success");
 //				resultMap.put("data", loginMember);
 				status = HttpStatus.ACCEPTED;
 			} else {

@@ -94,7 +94,7 @@ module.exports = function(/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["LocalStorage", "SessionStorage"]
+      plugins: ["LocalStorage", "SessionStorage"] //LocalStorage,SessionStorage이걸 사용하겠다고 선언
     },
 
     // animations: 'all', // --- includes all animations
