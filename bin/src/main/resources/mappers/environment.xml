@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.mapper.EnvironmentMapper">
+
+	<!-- 환경정보 조회 -->
+	<select id="envirList" parameterType="String" resultType="EnvironmentDto">
+		select cname,lnumber,scode,sname,mchkdate,chkagencyname,mapgubun,isdiposal,locroadaddr,locaddr from environment 
+		where locaddr  like concat('%',#{gu},'%') 
+		or locroadaddr like concat('%',#{gu},'%')
+	</select>
+
+</mapper>
+

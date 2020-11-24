@@ -8,71 +8,44 @@
         <q-toolbar-title>
           <img src="~assets/login-logo.png" @click="f_main" width="200px" />
         </q-toolbar-title>
-        <div style="margin-right:800px">
+
+        <div v-if="!loginok">
+          <q-btn
+            class="hver"
+            @click="login"
+            flat
+            text-color="#666666"
+            label="로그인"
+            style="font-weight:800;"
+          ></q-btn>
+          |
           <q-btn
             class="hver"
             flat
+            @click="join"
             text-color="#666666"
-            label="소개"
+            label="회원가입"
             style="font-weight:800;"
-          >
-          </q-btn>
-          <q-btn
-            class="hver"
-            flat
-            text-color="#666666"
-            label="커뮤니티"
-            style="font-weight:800;"
-          >
-            <q-btn color="primary" flat style="font-weight:700;">
-              <q-menu transition-show="jump-down" transition-hide="jump-up">
-                <q-list style="min-width: 150px">
-                  <q-item clickable @click="mypage">
-                    <q-item-section>My page</q-item-section>
-                  </q-item>
-                  <q-item clickable @click="logout">
-                    <q-item-section>로그아웃</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-          </q-btn>
+          ></q-btn>
         </div>
-        <div class="row inline">
-          <div v-if="!loginok">
-            <q-btn
-              class="hver"
-              @click="login"
-              flat
-              text-color="#666666"
-              label="로그인"
-              style="font-weight:800;"
-            ></q-btn>
-            |
-            <q-btn
-              class="hver"
-              flat
-              @click="join"
-              text-color="#666666"
-              label="회원가입"
-              style="font-weight:800;"
-            ></q-btn>
-          </div>
-          <div v-else>
-            <q-btn color="primary" flat :label="nim" style="font-weight:700;">
-              <q-menu transition-show="jump-down" transition-hide="jump-up">
-                <q-list style="min-width: 150px">
-                  <q-item clickable @click="mypage">
-                    <q-item-section>My page</q-item-section>
-                  </q-item>
-                  <q-item clickable @click="logout">
-                    <q-item-section>로그아웃</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-          </div>
-        </div>
+        <q-btn
+          v-else
+          color="primary"
+          flat
+          :label="nim"
+          style="font-weight:700;"
+        >
+          <q-menu transition-show="jump-down" transition-hide="jump-up">
+            <q-list style="min-width: 150px">
+              <q-item clickable @click="mypage">
+                <q-item-section>My page</q-item-section>
+              </q-item>
+              <q-item clickable @click="logout">
+                <q-item-section>로그아웃</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
     <!-- 헤더 끝 -->
@@ -123,7 +96,7 @@ export default {
         "(" +
         SessionStorage.getItem("userName") +
         ")님 환영합니다."
-      //essentialLinks: linksData,
+      //essentialLinks: linksData
     };
   },
   mounted() {
@@ -142,10 +115,6 @@ export default {
       } else {
         this.loginok = false;
       }
-    },
-
-    searchMove(searchAddr) {
-      this.$router.push({ path: "/map/", params: { no: searchAddr } });
     },
     f_main() {
       alert("해피하우스에용~:->");
