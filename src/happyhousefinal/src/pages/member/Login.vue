@@ -63,7 +63,8 @@ export default {
         userid: "",
         userpwd: ""
       },
-      message: ""
+      message: "",
+      msge: ""
     };
   },
   computed: {
@@ -92,7 +93,7 @@ export default {
             color: "red-5",
             textColor: "white",
             icon: "warning",
-            message: this.msg
+            message: "로그인 실패"
           });
         });
     },
