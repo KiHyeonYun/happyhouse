@@ -20,7 +20,7 @@ import List from "../components/map/List.vue";
 import Maps from "../components/map/Maps.vue";
 
 export default {
-  name: "Map",
+  name: "Mapview",
   props: {
     no: {}
   },

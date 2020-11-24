@@ -1,39 +1,36 @@
 <template>
   <div class="home">
     <div style="display:none">{{ this.aptlist }}</div>
-
-    <div class="nearbyinfo row">
-      <div class="col-md-6"></div>
-      <div class="col-md-6" id="detail">
-        <button type="button" class="btn subfuncbtn" @click="envirInfo">
-          환경정보
-        </button>
-        <button type="button" class="btn subfuncbtn" @click="getHospital(0)">
-          선별 진료소
-        </button>
-        <button type="button" class="btn subfuncbtn" @click="getHospital(1)">
-          안심 병원
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div id="map" style="margin: auto; height: 500px;" class="map"></div>
-    </div>
-
-    <table>
-      <!-- 이건 테스트용 -->
-      <tbody>
-        <tr>
-          <td>{{ this.apt.no }}</td>
-          <td>{{ this.apt.aptName }}</td>
-          <td>{{ this.apt.dong }}</td>
-          <td>{{ this.apt.jibun }}</td>
-          <td>{{ this.apt.floor }}</td>
-          <td>{{ this.apt.lat }}</td>
-          <td>{{ this.apt.lng }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <q-page-sticky style="z-index : 5;" position="top-left" :offset="[18, 18]">
+      <q-fab
+        v-model="fab"
+        label="지역정보"
+        label-position="left"
+        color="purple"
+        icon="keyboard_arrow_right"
+        direction="right"
+      >
+        <q-fab-action
+          color="secondary"
+          @click="envirInfo"
+          icon="local_hospital"
+          label="환경정보"
+        />
+        <q-fab-action
+          color="primary"
+          @click="getHospital(0)"
+          icon="add_alert"
+          label="선별 진료소"
+        />
+        <q-fab-action
+          color="warning"
+          @click="getHospital(1)"
+          icon="local_hospital"
+          label="안심병원"
+        />
+      </q-fab>
+    </q-page-sticky>
+    <div id="map" style="margin: 0; height : 876px;" class="map"></div>
   </div>
 </template>
 
@@ -53,6 +50,7 @@ export default {
       }, // envir
       map: null,
       tmpApt: null,
+      fab: false, //플로팅 버튼
       marker: null,
       multimarker: "",
       markers: [],
@@ -682,20 +680,37 @@ export default {
     // console.log("완료");
   },
   mounted() {
+    console.log("맵을 만들자");
+
     this.tmpApt = this.apt;
     window.kakao && window.kakao.maps
       ? this.initMap()
       : this.addKakaoMapScript();
   },
   updated() {
-    this.$nextTick(function() {
-      if (this.tmpApt != this.apt) {
-        this.addMarkersSeleted(this.apt); //.lat, this.apt.lng
-        this.tmpApt = this.apt;
-      } else {
-        this.addMarkersAll(this.aptlist);
+    // console.log("맵을 만들자");
+    // this.$nextTick(function() {
+    //   if (this.tmpApt != this.apt) {
+    //     this.addMarkersSeleted(this.apt); //.lat, this.apt.lng
+    //     this.tmpApt = this.apt;
+    //   } else {
+    //     this.addMarkersAll(this.aptlist);
+    //   }
+    // });
+  },
+  watch: {
+    apt: function(newVal, oldVal) {
+      while (this.envirmarkers.length > 0) {
+        this.envirmarkers.pop().setMap(null);
       }
-    });
+      this.addMarkersSeleted(newVal);
+    },
+    aptlist: function(newVal, oldVal) {
+      while (this.envirmarkers.length > 0) {
+        this.envirmarkers.pop().setMap(null);
+      }
+      this.addMarkersAll(newVal);
+    }
   }
 };
 </script>
