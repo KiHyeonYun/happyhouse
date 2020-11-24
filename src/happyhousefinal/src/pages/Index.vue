@@ -86,7 +86,7 @@ export default {
       slide: "style",
       lorem: "토큰 값은 : " + this.$store.state.accessToken,
       searchAddr: {
-        dealType: "1", //무조건 아파트 ㅋ
+        dealType: "1",
         searchType: "", //동? 건물명?
         keyword: "" //검색명
       }

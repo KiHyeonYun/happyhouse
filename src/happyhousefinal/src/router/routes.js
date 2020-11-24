@@ -27,7 +27,13 @@ const routes = [
       {
         path: "/login/:nextRoute",
         component: () => import("pages/member/Login.vue")
-      }
+      },
+      {
+        path: "/map/",
+        name: "Map",
+        component: () => import("pages/map.vue"),
+        props: true,
+      },
     ]
   },
 
@@ -45,12 +51,6 @@ const routes = [
     path: "/join",
     name: "Join",
     component: () => import("pages/member/join.vue")
-  },
-  {
-    path: "/map/",
-    name: "Map",
-    component: () => import("pages/map.vue"),
-    props: true,
   },
 ];
 
