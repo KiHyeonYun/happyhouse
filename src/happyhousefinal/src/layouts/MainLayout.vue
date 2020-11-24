@@ -139,6 +139,7 @@ export default {
     logincheck() {
       if (!SessionStorage.isEmpty()) {
         this.loginok = true;
+        alert(this.loginok);
       } else {
         this.loginok = false;
       }

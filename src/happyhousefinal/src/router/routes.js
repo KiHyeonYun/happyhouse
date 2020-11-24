@@ -1,5 +1,12 @@
-import store from "../store";
+// import store from "../store/index";
+import MainLayout from "../layouts/MainLayout.vue";
+import Mypage from "../pages/member/Mypage.vue";
+import Login from "../pages/member/Login.vue";
+import Join from "../pages/member/Join.vue";
+import Index from "../pages/Index.vue";
+import Mapview from "../pages/Mapview.vue";
 import { SessionStorage } from "quasar";
+
 const requireAuth = () => (to, from, next) => {
   const nextRoute = to.path;
 
@@ -13,25 +20,21 @@ const requireAuth = () => (to, from, next) => {
 const routes = [
   {
     path: "/",
-    component: () => import("layouts/MainLayout.vue"),
+    component:MainLayout,
     children: [
       {
         path: "",
-        component: () => import("pages/Index.vue")
+        component: Index
       },
       {
         path: "/mypage",
-        component: () => import("pages/member/Mypage.vue"),
+        component: Mypage,
         beforeEnter: requireAuth()
       },
       {
-        path: "/login/:nextRoute",
-        component: () => import("pages/member/Login.vue")
-      },
-      {
-        path: "/map/",
+        path: "/mapview",
         name: "Map",
-        component: () => import("pages/map.vue"),
+        component: Mapview,
         props: true,
       },
     ]
@@ -45,12 +48,16 @@ const routes = [
   },
   {
     path: "/login",
-    component: () => import("pages/member/Login.vue")
+    component: Login
+  },
+  {
+    path: "/login/:nextRoute",
+    component: Login,
   },
   {
     path: "/join",
     name: "Join",
-    component: () => import("pages/member/join.vue")
+    component: Join
   },
 ];
 

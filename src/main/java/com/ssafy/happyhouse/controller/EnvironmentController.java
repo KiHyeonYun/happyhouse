@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,9 @@ public class EnvironmentController {
 	private EnvironmentService environmentService;
 	
 	 @ApiOperation(value = "모든 환경정보의 정보를 반환한다.", response = List.class)
-		@GetMapping(value = "/envirList/{gu}")
-		public ResponseEntity<List<EnvironmentDto>> envirList(@PathVariable("gu") String gu) throws Exception {
-			logger.debug("envirList - 호출  : "+ gu);
-			return new ResponseEntity<List<EnvironmentDto>>(environmentService.envirList(gu), HttpStatus.OK);
+		@GetMapping(value = "/envirList/")
+		public ResponseEntity<List<EnvironmentDto>> envirList(Map<String, String> map) throws Exception {
+			logger.debug("envirList - 호출  : "+ map);
+			return new ResponseEntity<List<EnvironmentDto>>(environmentService.envirList(map), HttpStatus.OK);
 		}
 }

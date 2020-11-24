@@ -32,7 +32,7 @@
 
 	<!-- 코로나 병원 및 진료소 리스트-->
 	<select id="getCoronaList" parameterType="Map" resultType="CoronaDto">
-			select * from coronahc where type = #{type} and gunguCode like concat('%', '#{code}', '%')
+			select * from coronahc where type = #{type} and gunguCode like concat('%', #{code}, '%')
 	</select>
 	
 	

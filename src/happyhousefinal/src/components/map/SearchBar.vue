@@ -1,28 +1,33 @@
 <template>
   <div class="home">
-    <input type="hidden" name="act" id="act" value="search" />
-    <select
-      id="dealType"
-      name="dealType"
-      style="display: none;"
-      v-model="searchAddr.dealType"
+    <q-slide-item
+      class="q-pa-md"
+      @left="onLeft"
+      @right="onRight"
+      left-color="purple"
+      right-color="blue"
     >
-      <option value="1" selected></option>
-      <option value="2"></option>
-      <option value="3"></option>
-      <option value="4"></option>
-    </select>
-    <select
-      class="custom-select"
-      id="searchType"
-      name="searchType"
-      v-model="searchAddr.searchType"
-    >
-      <option value="0" selected>동으로 검색</option>
-      <option value="1">건물명으로 검색</option>
-      <option value="2">역이름으로 검색</option>
-    </select>
+      <template v-slot:left>
+        <div class="row items-center">
+          <q-icon left name="done" /> 동명으로 검색
+        </div>
+      </template>
+      <template v-slot:right>
+        <div class="row items-center">
+          아파트명으로 검색<q-icon right name="done" />
+        </div>
+      </template>
 
+      <q-item :class="bgcolor">
+        <q-item-section avatar>
+          <q-icon color="white" name="sync_alt" />
+        </q-item-section>
+        <q-item-section
+          style="color:white;"
+          v-text="slideText"
+        ></q-item-section>
+      </q-item>
+    </q-slide-item>
     <q-input
       square
       outlined
@@ -59,6 +64,9 @@ export default {
 
   data() {
     return {
+      slideText: "좌우로 밀어주세요!",
+      bgcolor: "bg-orange",
+      searchModel: null,
       searchAddr: {
         dealType: "",
         searchType: "",
@@ -69,6 +77,25 @@ export default {
   methods: {
     searchAddress: function() {
       this.$emit("search-addr", this.searchAddr);
+    },
+    onLeft({ reset }) {
+      this.slideText = "동명으로 검색";
+      this.bgcolor = "bg-purple";
+      this.searchAddr.searchType = "0";
+      this.$q.notify("검색 타입 : '동'");
+      this.finalize(reset);
+    },
+
+    onRight({ reset }) {
+      this.slideText = "아파트명으로 검색";
+      this.bgcolor = "bg-blue";
+      this.searchAddr.searchType = "1";
+      this.$q.notify("검색 타입 : '아파트'");
+      this.finalize(reset);
+    },
+
+    finalize(reset) {
+      reset();
     }
   },
   mounted() {

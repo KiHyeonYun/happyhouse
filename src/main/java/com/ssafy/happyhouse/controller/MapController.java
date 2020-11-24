@@ -52,9 +52,9 @@ public class MapController {
 			
 			return new ResponseEntity<List<HouseDto>>(mapService.getHouseList(map),HttpStatus.OK);
 		}
-	 @ApiOperation(value = "house list를 반환한다.", response = List.class)
+	 @ApiOperation(value = "코로나 병원 list를 반환한다.", response = List.class)
 		@GetMapping(value = "/map/corona/")
-		public ResponseEntity<List<CoronaDto>> coronaHCList(@RequestParam Map<String, Object> map) throws Exception {
+		public ResponseEntity<List<CoronaDto>> coronaHCList(@RequestParam Map<String, String> map) throws Exception {
 			logger.debug("병원 또는 클리닉 - 호출  : "+ map);
 			
 			return new ResponseEntity<List<CoronaDto>>(mapService.getCoronaList(map),HttpStatus.OK);
