@@ -22,7 +22,6 @@ const routes = [
         component: () => import("pages/member/Mypage.vue"),
         beforeEnter: requireAuth()
       },
-
       {
         path: "/map",
         name: "Map",

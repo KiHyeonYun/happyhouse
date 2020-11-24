@@ -72,9 +72,8 @@
 </template>
 
 <script>
-import search from "components/map/search.vue";
-import detail from "components/map/detail.vue";
-import itemlist from "components/map/itemlist.vue";
+import axios from "axios";
+import routes from "src/router/routes";
 
 export default {
   name: "MainLayout",
@@ -82,7 +81,6 @@ export default {
   data() {
     return {
       model: null,
-      left: false,
       loginok: false
       //essentialLinks: linksData
     };
@@ -111,7 +109,8 @@ export default {
     },
     mypage() {
       this.$router.push("/mypage");
-    }
+    },
+    logout() {}
   }
 };
 </script>
