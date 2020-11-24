@@ -4,7 +4,7 @@
       <form
         class="form-inline"
         id="searchForm"
-        @keyup.enter="searchMove(searchAddr)"
+        @submit.prevent="searchMove(searchAddr)"
       >
         <div class="col-auto my-1">
           <select
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     searchMove(searchAddr) {
-      this.$router.push({ path: "/map/", params: { no: searchAddr } });
+      this.$router.push({ name: "Map", params: { no: searchAddr } });
     }
   },
   mounted() {

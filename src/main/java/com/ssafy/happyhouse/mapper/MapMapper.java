@@ -14,6 +14,6 @@ public interface MapMapper {
 	public HouseDto getHouseDetail(int no) throws Exception;
 	public List<HouseDto> getHouseListDong(String keyword) throws Exception;
 	public List<HouseDto> getHouseListName(String keyword) throws Exception;
-	public List<CoronaDto> getCoronaList(Map<String, Object> map) throws Exception;
+	public List<CoronaDto> getCoronaList(Map<String, String> map) throws Exception;
 	
 }

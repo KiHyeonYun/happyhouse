@@ -39,7 +39,7 @@ public class MapServiceImpl implements MapService {
 	}
 
 	@Override
-	public List<CoronaDto> getCoronaList(Map<String, Object> map) throws Exception {  //getCoronaList
+	public List<CoronaDto> getCoronaList(Map<String, String> map) throws Exception {  //getCoronaList
 		return sqlSession.getMapper(MapMapper.class).getCoronaList(map);
 	}
 	

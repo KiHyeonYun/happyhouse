@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { SessionStorage } from "quasar";
 // import example from './module-example'
 
 Vue.use(Vuex);
@@ -25,6 +26,11 @@ export default function(/* { ssrContext } */) {
     // plugins: [createPersistedState()],
     getters: {
       getAccessToken(state) {
+        if (sessionStorage.getItem("accessToken") != null) {
+          this.state.accessToken = sessionStorage.getItem("accessToken");
+          this.state.userId = sessionStorage.getItem("userId");
+          this.state.userName = sessionStorage.getItem("userName");
+        }
         return state.accessToken;
       },
       getUserId(state) {
@@ -60,6 +66,7 @@ export default function(/* { ssrContext } */) {
       LOGOUT(context) {
         context.commit("LOGOUT");
         axios.defaults.headers.common["auth-token"] = undefined;
+        
       }
     },
 

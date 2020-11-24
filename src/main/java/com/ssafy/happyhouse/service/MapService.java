@@ -10,5 +10,5 @@ public interface MapService {
 	public String getDongCode(String dong) throws Exception;
 	public HouseDto getHouseDetail(int no)throws Exception;
 	public List<HouseDto> getHouseList(Map<String, Object> map)throws Exception;
-	public List<CoronaDto> getCoronaList(Map<String, Object> map)throws Exception;
+	public List<CoronaDto> getCoronaList(Map<String, String> map)throws Exception;
 }
