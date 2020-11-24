@@ -10,5 +10,31 @@
 		from dongcode 
 		where dong like concat('%','${value}','%')
 	</select>
+	
+	<!-- 선택한 집 상세정보 -->
+	<select id="getHouseDetail" parameterType="int" resultType="HouseDto">
+		select *
+		from housedeal 
+		where no = ${value}
+	</select>
+	
+	
+	<!-- 하우스 리스트 동-->
+	<select id="getHouseListDong" parameterType="String" resultType="HouseDto">
+		select * from housedeal where dong like concat('%', '${vaule}','%')
+	</select>
+
+	<!-- 하우스 리스트 이름-->
+	<select id="getHouseListName" parameterType="String" resultType="HouseDto">
+		select * from housedeal where aptName like concat('%', '${vaule}','%')
+	</select>
+  
+
+	<!-- 코로나 병원 및 진료소 리스트-->
+	<select id="getCoronaList" parameterType="Map" resultType="CoronaDto">
+			select * from coronahc where type = #{type} and gunguCode like concat('%', '#{code}', '%')
+	</select>
+	
+	
 </mapper>
 

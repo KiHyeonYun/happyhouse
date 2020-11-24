@@ -1,6 +1,39 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md">
+      <form
+        class="form-inline"
+        id="searchForm"
+        @keyup.enter="searchMove(searchAddr)"
+      >
+        <div class="col-auto my-1">
+          <select
+            class="custom-select mr-sm-2"
+            id="searchType"
+            name="searchType"
+            v-model="searchAddr.searchType"
+          >
+            <option value="0" selected>동으로 검색</option>
+            <option value="1">건물명으로 검색</option>
+          </select>
+        </div>
+        <input
+          class="form-control mr-sm-3"
+          id="keyword"
+          name="keyword"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          v-model="searchAddr.keyword"
+        />
+        <button
+          class="btn my-2 my-sm-0"
+          type="submit"
+          @click="searchMove(searchAddr)"
+        >
+          검색
+        </button>
+      </form>
       <q-carousel
         v-model="slide"
         vertical
@@ -51,8 +84,21 @@ export default {
   data() {
     return {
       slide: "style",
-      lorem: "토큰 값은 : " + this.$store.state.accessToken
+      lorem: "토큰 값은 : " + this.$store.state.accessToken,
+      searchAddr: {
+        dealType: "1", //무조건 아파트 ㅋ
+        searchType: "", //동? 건물명?
+        keyword: "" //검색명
+      }
     };
+  },
+  methods: {
+    searchMove(searchAddr) {
+      this.$router.push({ path: "/map/", params: { no: searchAddr } });
+    }
+  },
+  mounted() {
+    this.searchAddr.searchType = "0";
   }
 };
 </script>

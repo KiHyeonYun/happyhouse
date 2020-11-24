@@ -1,24 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import naver from "vue-naver-maps";
-import VueNaverMap from "vue-naver-map";
 // import example from './module-example'
 
 Vue.use(Vuex);
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 const MAP_URL = process.env.NAVER_CLIENT_ID;
-
-Vue.use(naver, {
-  clientID: MAP_URL,
-  useGovAPI: false, //공공 클라우드 API 사용 (선택)
-  subModules: "geocoder" // 서브모듈 (선택)
-});
-
-Vue.use(VueNaverMap, {
-  key: MAP_URL /* your key, type: String */,
-  libraries: ["geocoder"] /* type: Array */
-});
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation;

@@ -18,7 +18,7 @@ public class DongDto {
 
 	@Override
 	public String toString() {
-		return "dongDto [dongcode=" + dongcode + ", city=" + city + ", gugun=" + gugun + ", dong=" + dong + "]";
+		return "DongDto [dongcode=" + dongcode + ", city=" + city + ", gugun=" + gugun + ", dong=" + dong + "]";
 	}
 
 

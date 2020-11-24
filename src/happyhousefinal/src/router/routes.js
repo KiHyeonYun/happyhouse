@@ -23,11 +23,6 @@ const routes = [
         beforeEnter: requireAuth()
       },
       {
-        path: "/map",
-        name: "Map",
-        component: () => import("pages/map.vue")
-      },
-      {
         path: "/login/:nextRoute",
         component: () => import("pages/member/Login.vue")
       }
@@ -48,7 +43,13 @@ const routes = [
     path: "/join",
     name: "Join",
     component: () => import("pages/member/join.vue")
-  }
+  },
+  {
+    path: "/map/",
+    name: "Map",
+    component: () => import("pages/map.vue"),
+    props: true,
+  },
 ];
 
 export default routes;
