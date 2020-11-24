@@ -9,19 +9,23 @@
           <img src="~assets/login-logo.png" @click="f_main" width="200px" />
         </q-toolbar-title>
 
-        <q-btn-toggle
-          class="gle"
+        <q-btn
+          class="hver"
           v-if="!loginok"
-          align="right"
-          v-model="model"
-          toggle-color="black"
+          @click="login"
           flat
-          :options="[
-            { label: '로그인', value: 'login', to: '/login' },
-            { label: '회원가입', value: 'join', to: '/join' }
-          ]"
-        ></q-btn-toggle>
-
+          text-color="#666666"
+          label="로그인"
+        ></q-btn>
+        |
+        <q-btn
+          class="hver"
+          v-if="!loginok"
+          flat
+          @click="join"
+          text-color="#666666"
+          label="회원가입"
+        ></q-btn>
         <q-btn v-else color="primary" label="회원님 반갑습니다.">
           <q-menu transition-show="jump-down" transition-hide="jump-up">
             <q-list style="min-width: 150px">
@@ -90,6 +94,9 @@ export default {
     login() {
       this.$router.push("/login");
     },
+    join() {
+      this.$router.push("/join");
+    },
     logincheck() {
       if (this.$store.state.accessToken != null) {
         this.loginok = true;
@@ -112,7 +119,7 @@ export default {
 img:hover {
   cursor: pointer;
 }
-.gle:hover {
-  color: aqua;
+.hver:hover {
+  color: #0c38f8;
 }
 </style>
