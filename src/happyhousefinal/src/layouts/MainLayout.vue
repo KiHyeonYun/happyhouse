@@ -14,7 +14,7 @@
             flat
             text-color="#666666"
             label="소개"
-            style="font-weight:800;"
+            style="font-weight:800;margin-right:30px"
           >
           </q-btn>
           <q-btn

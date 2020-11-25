@@ -1,15 +1,13 @@
 <template>
   <div>
     <template class="row justify-center">
-      <div>
+      <div class="row  justify-center">
         <h6><strong>My page</strong></h6>
       </div>
     </template>
 
     <div class="q-pa-md">
       <div class="row justify-center">
-        <div class="col-12 col-md-2">여긴 그림자리야 !!@!@!@!2</div>
-
         <div class="col-12 col-md-5">
           <q-form @submit="onSubmit" class="q-gutter-md">
             <q-input
@@ -36,7 +34,7 @@
               style="width: 100%"
               lazy-rules
               :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
+                val => (val && val.length > 0) || 'Please type something'
               ]"
             >
               <template v-slot:prepend>
@@ -67,8 +65,8 @@
               style="width: 100%"
               lazy-rules
               :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
-                (val) => val == user.userpwd || '위 비밀번화와 다릅니다!',
+                val => (val && val.length > 0) || 'Please type something',
+                val => val == user.userpwd || '위 비밀번화와 다릅니다!'
               ]"
             >
               <template v-slot:prepend>
@@ -98,7 +96,7 @@
               lazy-rules
               style="width: 100%"
               :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
+                val => (val && val.length > 0) || 'Please type something'
               ]"
             >
               <template v-slot:prepend>
@@ -127,7 +125,7 @@
               style="width: 100%"
               lazy-rules
               :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
+                val => (val && val.length > 0) || 'Please type something'
               ]"
             >
               <template v-slot:prepend>
@@ -156,7 +154,7 @@
               :dense="dense"
               lazy-rules
               :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
+                val => (val && val.length > 0) || 'Please type something'
               ]"
             >
               <template v-slot:prepend>
@@ -202,20 +200,20 @@ export default {
         username: "",
         userpwd: "",
         useraddress: "",
-        useremail: "",
+        useremail: ""
       },
       confirmpwd: "",
-      dense: false,
+      dense: false
     };
   },
   created() {
     axios
       .get(`${SERVER_URL}/member/info`, {
         headers: {
-          "auth-token": SessionStorage.getItem("accessToken"),
-        },
+          "auth-token": SessionStorage.getItem("accessToken")
+        }
       })
-      .then((response) => {
+      .then(response => {
         this.user = response.data.user;
       })
       .catch(() => {
@@ -226,7 +224,7 @@ export default {
     onSubmit() {
       axios
         .put(process.env.VUE_APP_SERVER_URL + "/member/update", this.user)
-        .then((Response) => {
+        .then(Response => {
           alert(Response.data);
           if (Response.data.state == "success") {
             SessionStorage.set("userName", this.user.username);
@@ -234,7 +232,7 @@ export default {
               color: "green-4",
               textColor: "white",
               icon: "cloud_done",
-              message: "수정 성공",
+              message: "수정 성공"
             });
             location.href = "/";
           }
@@ -244,11 +242,11 @@ export default {
             color: "red-5",
             textColor: "white",
             icon: "warning",
-            message: "수정안됐어용...",
+            message: "수정안됐어용..."
           });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
