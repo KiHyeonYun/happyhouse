@@ -5,6 +5,7 @@ import Login from "../pages/member/Login.vue";
 import Join from "../pages/member/Join.vue";
 import Index from "../pages/Index.vue";
 import Mapview from "../pages/Mapview.vue";
+import Intro from "../pages/Intro.vue";
 import { SessionStorage } from "quasar";
 
 const requireAuth = () => (to, from, next) => {
@@ -20,7 +21,7 @@ const requireAuth = () => (to, from, next) => {
 const routes = [
   {
     path: "/",
-    component:MainLayout,
+    component: MainLayout,
     children: [
       {
         path: "",
@@ -35,8 +36,12 @@ const routes = [
         path: "/mapview",
         name: "Map",
         component: Mapview,
-        props: true,
+        props: true
       },
+      {
+        path: "/intro",
+        component: Intro
+      }
     ]
   },
 
@@ -52,13 +57,13 @@ const routes = [
   },
   {
     path: "/login/:nextRoute",
-    component: Login,
+    component: Login
   },
   {
     path: "/join",
     name: "Join",
     component: Join
-  },
+  }
 ];
 
 export default routes;

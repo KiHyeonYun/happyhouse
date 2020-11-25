@@ -14,11 +14,8 @@
             flat
             text-color="#666666"
             label="소개"
-<<<<<<< HEAD
+            @click="intro"
             style="font-weight:800;margin-right:30px"
-=======
-            style="font-weight:800; margin-right:30px"
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
           >
           </q-btn>
 
@@ -148,6 +145,9 @@ export default {
     },
     join() {
       this.$router.push("/join");
+    },
+    intro() {
+      this.$router.push("/intro");
     },
     logincheck() {
       if (!SessionStorage.isEmpty()) {
