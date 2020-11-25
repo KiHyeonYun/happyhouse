@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <q-page>
     <div style="padding-right:100px; padding-left:100px;">
       <div class="row" style="text-align:center">
@@ -9,7 +8,7 @@
             <form
               class="form-inline row inline"
               id="searchForm"
-              @keyup.enter="searchMove(searchAddr)"
+              @submit.prevent="searchMove(searchAddr)"
             >
               <div class="col-auto my-1">
                 <q-select
@@ -38,25 +37,6 @@
               </q-input>
             </form>
           </div>
-=======
-  <q-page class="flex flex-center">
-    <div class="q-pa-md">
-      <form
-        class="form-inline"
-        id="searchForm"
-        @submit.prevent="searchMove(searchAddr)"
-      >
-        <div class="col-auto my-1">
-          <select
-            class="custom-select mr-sm-2"
-            id="searchType"
-            name="searchType"
-            v-model="searchAddr.searchType"
-          >
-            <option value="0" selected>동으로 검색</option>
-            <option value="1">건물명으로 검색</option>
-          </select>
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
         </div>
       </div>
       <div class="row">
@@ -70,8 +50,8 @@
             arrows
             transition-prev="slide-right"
             transition-next="slide-left"
-            @mouseenter="autoplay = false"
             @mouseleave="autoplay = true"
+            @mouseenter="autoplay = false"
             class="rounded-borders"
           >
             <q-carousel-slide :name="1" img-src="~assets/house1.jpg" />

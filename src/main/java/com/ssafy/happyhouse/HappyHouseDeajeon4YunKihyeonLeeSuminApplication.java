@@ -38,5 +38,4 @@ public class HappyHouseDeajeon4YunKihyeonLeeSuminApplication implements WebMvcCo
                 .allowedHeaders("*")
                 .exposedHeaders("auth-token");
     }
-	
 }
