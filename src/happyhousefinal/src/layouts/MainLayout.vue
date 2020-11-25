@@ -14,7 +14,7 @@
             flat
             text-color="#666666"
             label="소개"
-            style="font-weight:800; margin-right:30px"
+            style="font-weight:800;"
           >
           </q-btn>
           <q-btn
@@ -32,6 +32,18 @@
             label="질문과 답변"
             style="font-weight:800;"
           >
+            <q-btn color="primary" flat style="font-weight:700;">
+              <q-menu transition-show="jump-down" transition-hide="jump-up">
+                <q-list style="min-width: 150px">
+                  <q-item clickable @click="mypage">
+                    <q-item-section>My page</q-item-section>
+                  </q-item>
+                  <q-item clickable @click="logout">
+                    <q-item-section>로그아웃</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
           </q-btn>
         </div>
         <div class="row inline">
@@ -58,10 +70,10 @@
             <q-btn color="primary" flat :label="nim" style="font-weight:700;">
               <q-menu transition-show="jump-down" transition-hide="jump-up">
                 <q-list style="min-width: 150px">
-                  <q-item clickable @click="mypage" class="hver">
+                  <q-item clickable @click="mypage">
                     <q-item-section>My page</q-item-section>
                   </q-item>
-                  <q-item clickable @click="logout" class="hver">
+                  <q-item clickable @click="logout">
                     <q-item-section>로그아웃</q-item-section>
                   </q-item>
                 </q-list>
@@ -72,6 +84,14 @@
       </q-toolbar>
     </q-header>
     <!-- 헤더 끝 -->
+
+    <!-- 왼쪽 사이드바 시작 -->
+    <!-- <q-drawer v-model="left" show-if-above bordered content-class="bg-grey-1">
+      <q-list>
+        <q-item-label header class="text-grey-8"> </q-item-label>
+      </q-list>
+    </q-drawer> -->
+    <!-- 왼쪽 사이드바 끝 -->
 
     <!-- 중앙 child view 시작 -->
     <q-page-container>
@@ -124,7 +144,6 @@ export default {
     join() {
       this.$router.push("/join");
     },
-
     logincheck() {
       if (!SessionStorage.isEmpty()) {
         this.loginok = true;
@@ -138,6 +157,7 @@ export default {
       this.$router.push({ path: "/map/", params: { no: searchAddr } });
     },
     f_main() {
+      alert("해피하우스에용~:->");
       location.href = "/";
       // this.$router.push("/");
     },

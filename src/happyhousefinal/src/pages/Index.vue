@@ -50,8 +50,8 @@
             arrows
             transition-prev="slide-right"
             transition-next="slide-left"
-            @mouseenter="autoplay = false"
             @mouseleave="autoplay = true"
+            @mouseenter="autoplay = false"
             class="rounded-borders"
           >
             <q-carousel-slide :name="1" img-src="~assets/house1.jpg" />
