@@ -68,10 +68,12 @@
             infinite
             :autoplay="autoplay2"
             arrows
+            navigation
             transition-prev="slide-right"
             transition-next="slide-left"
             @mouseenter="autoplay2 = false"
             @mouseleave="autoplay2 = true"
+            navigation-icon="cloud"
           >
             <q-carousel-slide :name="1" img-src="~assets/adv1.png" />
             <q-carousel-slide :name="2" img-src="~assets/adv2.png" />
