@@ -14,9 +14,14 @@
             flat
             text-color="#666666"
             label="소개"
+<<<<<<< HEAD
             style="font-weight:800;margin-right:30px"
+=======
+            style="font-weight:800; margin-right:30px"
+>>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
           >
           </q-btn>
+
           <q-btn
             class="hver"
             flat
@@ -32,18 +37,18 @@
             label="질문과 답변"
             style="font-weight:800;"
           >
-            <q-btn color="primary" flat style="font-weight:700;">
-              <q-menu transition-show="jump-down" transition-hide="jump-up">
-                <q-list style="min-width: 150px">
-                  <q-item clickable @click="mypage">
-                    <q-item-section>My page</q-item-section>
-                  </q-item>
-                  <q-item clickable @click="logout">
-                    <q-item-section>로그아웃</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
+          </q-btn>
+          <q-btn color="primary" flat style="font-weight:700;">
+            <q-menu transition-show="jump-down" transition-hide="jump-up">
+              <q-list style="min-width: 150px">
+                <q-item clickable @click="mypage">
+                  <q-item-section>My page</q-item-section>
+                </q-item>
+                <q-item clickable @click="logout">
+                  <q-item-section>로그아웃</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
           </q-btn>
         </div>
         <div class="row inline">
