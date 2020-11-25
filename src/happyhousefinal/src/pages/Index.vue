@@ -14,7 +14,7 @@
                 <q-select
                   class="custom-select mr-sm-2"
                   outlined
-                  style="width:120px; margin-right:10px"
+                  style="width:170px; margin-right:10px"
                   v-model="searchoption"
                   :options="options"
                 />
@@ -39,19 +39,20 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-8">
           <q-carousel
-            style="height:550px; border-radius: 13px;"
+            style="height:780px; border-radius: 13px;"
             animated
             v-model="slide1"
             infinite
-            :autoplay="autoplay"
+            :autoplay="autoplay1"
             arrows
             transition-prev="slide-right"
             transition-next="slide-left"
-            @mouseleave="autoplay = true"
-            @mouseenter="autoplay = false"
+            @mouseleave="autoplay1 = true"
+            @mouseenter="autoplay1 = false"
             class="rounded-borders"
           >
             <q-carousel-slide :name="1" img-src="~assets/house1.jpg" />
@@ -61,16 +62,16 @@
         </div>
         <div class="col" style="margin-left:20px">
           <q-carousel
-            style="height:550px; border-radius: 13px;"
+            style="height:780px; border-radius: 13px;"
             animated
             v-model="slide2"
             infinite
-            :autoplay="autoplay"
+            :autoplay="autoplay2"
             arrows
             transition-prev="slide-right"
             transition-next="slide-left"
-            @mouseenter="autoplay = false"
-            @mouseleave="autoplay = true"
+            @mouseenter="autoplay2 = false"
+            @mouseleave="autoplay2 = true"
           >
             <q-carousel-slide :name="1" img-src="~assets/adv1.png" />
             <q-carousel-slide :name="2" img-src="~assets/adv2.png" />
@@ -91,7 +92,8 @@ export default {
     return {
       slide1: "1",
       slide2: "1",
-      autoplay: true,
+      autoplay1: true,
+      autoplay2: true,
       searchAddr: {
         dealType: "1",
         searchType: "", //동? 건물명?
