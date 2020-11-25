@@ -20,7 +20,7 @@ const requireAuth = () => (to, from, next) => {
 const routes = [
   {
     path: "/",
-    component:MainLayout,
+    component: MainLayout,
     children: [
       {
         path: "",
@@ -35,8 +35,8 @@ const routes = [
         path: "/mapview",
         name: "Map",
         component: Mapview,
-        props: true,
-      },
+        props: true
+      }
     ]
   },
 
@@ -52,13 +52,13 @@ const routes = [
   },
   {
     path: "/login/:nextRoute",
-    component: Login,
+    component: Login
   },
   {
     path: "/join",
     name: "Join",
     component: Join
-  },
+  }
 ];
 
 export default routes;
