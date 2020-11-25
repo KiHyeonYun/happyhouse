@@ -225,7 +225,6 @@ export default {
       axios
         .put(process.env.VUE_APP_SERVER_URL + "/member/update", this.user)
         .then(Response => {
-          alert(Response.data);
           if (Response.data.state == "success") {
             SessionStorage.set("userName", this.user.username);
             this.$q.notify({

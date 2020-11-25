@@ -14,11 +14,7 @@
             flat
             text-color="#666666"
             label="소개"
-<<<<<<< HEAD
-            style="font-weight:800;margin-right:30px"
-=======
             style="font-weight:800; margin-right:30px"
->>>>>>> branch 'master' of https://github.com/KiHyeonYun/happyhouse.git
           >
           </q-btn>
 
@@ -28,6 +24,7 @@
             text-color="#666666"
             label="공지사항"
             style="font-weight:800;margin-right:30px"
+            @click.prevent="goBoard"
           >
           </q-btn>
           <q-btn
@@ -36,6 +33,7 @@
             text-color="#666666"
             label="질문과 답변"
             style="font-weight:800;"
+            @click="chatOpen"
           >
           </q-btn>
           <q-btn color="primary" flat style="font-weight:700;">
@@ -116,19 +114,25 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-footer> -->
+    <q-page-sticky position="top-right" :offset="[18, 18]">
+      <q-btn round color="secondary" icon="maps_ugc" @click="chatOpen" />
+      <chat v-show="chatview"></chat>
+    </q-page-sticky>
   </q-layout>
 </template>
 
 <script>
 import axios from "axios";
 import routes from "src/router/routes";
+import Chat from "src/pages/Chat.vue";
 import { SessionStorage } from "quasar";
 
 export default {
   name: "MainLayout",
-  // components: { EssentialLink },
+  components: { Chat },
   data() {
     return {
+      chatview: false,
       model: null,
       loginok: false,
       nim:
@@ -143,6 +147,15 @@ export default {
     this.logincheck();
   },
   methods: {
+    goBoard() {
+      this.$router.push("/BoardList");
+    },
+    chatOpen() {
+      if (this.chatview) this.chatview = false;
+      else this.chatview = true;
+
+      console.log(this.chatview);
+    },
     login() {
       this.$router.push("/login");
     },
@@ -152,7 +165,6 @@ export default {
     logincheck() {
       if (!SessionStorage.isEmpty()) {
         this.loginok = true;
-        alert(this.loginok);
       } else {
         this.loginok = false;
       }
@@ -162,7 +174,6 @@ export default {
       this.$router.push({ path: "/map/", params: { no: searchAddr } });
     },
     f_main() {
-      alert("해피하우스에용~:->");
       location.href = "/";
       // this.$router.push("/");
     },

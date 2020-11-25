@@ -239,7 +239,6 @@ export default {
         axios
           .post(process.env.VUE_APP_SERVER_URL + "/member/regist", this.member)
           .then(Response => {
-            alert(Response.data);
             if (Response.data.state == "success") {
               this.$q.notify({
                 color: "green-4",

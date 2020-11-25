@@ -5,6 +5,10 @@ import Login from "../pages/member/Login.vue";
 import Join from "../pages/member/Join.vue";
 import Index from "../pages/Index.vue";
 import Mapview from "../pages/Mapview.vue";
+import SelectBoard from "../components/board/SelectBoard.vue";
+import SelectBoardByNo from "../components/board/SelectBoardByNo.vue";
+import InsertBoard from "../components/board/InsertBoard.vue";
+
 import { SessionStorage } from "quasar";
 
 const requireAuth = () => (to, from, next) => {
@@ -20,7 +24,7 @@ const requireAuth = () => (to, from, next) => {
 const routes = [
   {
     path: "/",
-    component:MainLayout,
+    component: MainLayout,
     children: [
       {
         path: "",
@@ -35,8 +39,24 @@ const routes = [
         path: "/mapview",
         name: "Map",
         component: Mapview,
-        props: true,
+        props: true
       },
+      {
+        path: "/write",
+        name: "InsertBoard",
+        component: InsertBoard
+      },
+      {
+        path: "/detail/:no",
+        name: "SelectBoardByNo",
+        component: SelectBoardByNo,
+        props: true
+      },
+      {
+        path: "/BoardList",
+        name: "BoardList",
+        component: SelectBoard
+      }
     ]
   },
 
@@ -47,18 +67,22 @@ const routes = [
     component: () => import("pages/Error404.vue")
   },
   {
+    path: "/chat",
+    component: () => import("pages/Chat.vue")
+  },
+  {
     path: "/login",
     component: Login
   },
   {
     path: "/login/:nextRoute",
-    component: Login,
+    component: Login
   },
   {
     path: "/join",
     name: "Join",
     component: Join
-  },
+  }
 ];
 
 export default routes;

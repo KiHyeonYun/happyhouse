@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 //http://localhost:8888/happyhouse/swagger-ui.html
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-@RequestMapping("/freeboard")
+@RequestMapping("/board")
 public class FreeBoardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FreeBoardController.class);

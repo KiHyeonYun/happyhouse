@@ -42,13 +42,19 @@
           @click="searchAddr.keyword = ''"
           class="cursor-pointer"
         />
+
         <q-icon name="search" @click="searchAddress" class="cursor-pointer" />
       </template>
     </q-input>
-
-    <button type="button" id="searchbtn" @click="searchAddress">
-      <i class="fa fa-search"></i> 아이콘 머지
-    </button>
+    <q-btn
+      style="width : 100%"
+      align="Align between"
+      class="btn-fixed-width"
+      :color="resetcolor"
+      label="모든 리스트 마커보기"
+      icon="history"
+      @click="searchAddress"
+    />
   </div>
 </template>
 
@@ -66,6 +72,7 @@ export default {
     return {
       slideText: "좌우로 밀어주세요!",
       bgcolor: "bg-orange",
+      resetcolor: "orange",
       searchModel: null,
       searchAddr: {
         dealType: "",
@@ -76,11 +83,18 @@ export default {
   },
   methods: {
     searchAddress: function() {
-      this.$emit("search-addr", this.searchAddr);
+      if (this.searchAddr.keyword == "" || this.searchAddr.keyword == null) {
+        this.$q.notify({
+          type: "negative",
+          message: `검색어를 입력해주세요.`,
+          position: "top"
+        });
+      } else this.$emit("search-addr", this.searchAddr);
     },
     onLeft({ reset }) {
       this.slideText = "동명으로 검색";
       this.bgcolor = "bg-purple";
+      this.resetcolor = "purple";
       this.searchAddr.searchType = "0";
       this.$q.notify("검색 타입 : '동'");
       this.finalize(reset);
@@ -89,6 +103,7 @@ export default {
     onRight({ reset }) {
       this.slideText = "아파트명으로 검색";
       this.bgcolor = "bg-blue";
+      this.resetcolor = "blue";
       this.searchAddr.searchType = "1";
       this.$q.notify("검색 타입 : '아파트'");
       this.finalize(reset);

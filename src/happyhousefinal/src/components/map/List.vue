@@ -5,7 +5,7 @@
         v-for="(apt, index) in aptlist"
         :key="index"
         expand-separator
-        icon="perm_identity"
+        :icon="apt.type"
         :label="apt.aptName"
         :caption="apt.dealAmount + manwon"
         @click="mapBarMove(apt)"
@@ -62,8 +62,7 @@ export default {
           console.log(error);
         });
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 
