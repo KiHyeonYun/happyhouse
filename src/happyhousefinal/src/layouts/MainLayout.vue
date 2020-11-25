@@ -162,6 +162,9 @@ export default {
     join() {
       this.$router.push("/join");
     },
+    intro() {
+      this.$router.push("/intro");
+    },
     logincheck() {
       if (!SessionStorage.isEmpty()) {
         this.loginok = true;
