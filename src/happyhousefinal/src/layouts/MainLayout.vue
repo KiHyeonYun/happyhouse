@@ -8,7 +8,7 @@
         <q-toolbar-title>
           <img src="~assets/login-logo.png" @click="f_main" width="200px" />
         </q-toolbar-title>
-        <div style="margin-right:700px">
+        <div style="margin-right:40%">
           <q-btn
             class="hver"
             flat
@@ -21,19 +21,17 @@
             class="hver"
             flat
             text-color="#666666"
-            label="커뮤니티"
+            label="공지사항"
+            style="font-weight:800;margin-right:30px"
+          >
+          </q-btn>
+          <q-btn
+            class="hver"
+            flat
+            text-color="#666666"
+            label="질문과 답변"
             style="font-weight:800;"
           >
-            <q-menu transition-show="jump-down" transition-hide="jump-up">
-              <q-list style="min-width: 150px">
-                <q-item clickable @click="mypage" class="hver">
-                  <q-item-section>공지사항</q-item-section>
-                </q-item>
-                <q-item clickable @click="logout" class="hver">
-                  <q-item-section>질문과 답변</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
           </q-btn>
         </div>
         <div class="row inline">

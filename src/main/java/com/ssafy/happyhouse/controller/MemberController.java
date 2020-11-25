@@ -131,7 +131,7 @@ public class MemberController {
 	 }
 	 @ApiOperation(value="회원의 정보를 삭제합니다 (탈퇴)" ,response=BooleanResult.class)
 	@DeleteMapping("/delete")
-	 public ResponseEntity<BooleanResult>deleteMember( String userid) throws Exception{
+	 public ResponseEntity<BooleanResult>deleteMember(@RequestBody String userid) throws Exception{
 		 logger.info("회원 정보 삭제 !!!!"+new Date());
 		 logger.info("회원 정보 삭제 !!!!"+userid);
 		 boolean checkdelete=memberService.delete(userid);

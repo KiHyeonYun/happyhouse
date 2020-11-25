@@ -54,21 +54,9 @@
             @mouseleave="autoplay = true"
             class="rounded-borders"
           >
-            <q-carousel-slide
-              :name="1"
-              class="ig"
-              img-src="~assets/house1.jpg"
-            />
-            <q-carousel-slide
-              :name="2"
-              class="ig"
-              img-src="~assets/house2.jpg"
-            />
-            <q-carousel-slide
-              :name="3"
-              class="ig"
-              img-src="~assets/apart1.jpg"
-            />
+            <q-carousel-slide :name="1" img-src="~assets/house1.jpg" />
+            <q-carousel-slide :name="2" img-src="~assets/house2.jpg" />
+            <q-carousel-slide :name="3" img-src="~assets/apart1.jpg" />
           </q-carousel>
         </div>
         <div class="col" style="margin-left:20px">
@@ -79,10 +67,12 @@
             infinite
             :autoplay="autoplay"
             arrows
+            navigation
             transition-prev="slide-right"
             transition-next="slide-left"
             @mouseenter="autoplay = false"
             @mouseleave="autoplay = true"
+            navigation-icon="cloud"
           >
             <q-carousel-slide :name="1" img-src="~assets/adv1.png" />
             <q-carousel-slide :name="2" img-src="~assets/adv2.png" />
@@ -138,8 +128,5 @@ export default {
   padding: 12px;
   color: white;
   background-color: rgba(0, 0, 0, 0.3);
-}
-.ig:hover {
-  transform: scale(1.1);
 }
 </style>
