@@ -103,7 +103,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.getChat();
-    }, 100000);
+    }, 3500);
   }
 };
 </script>

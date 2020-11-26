@@ -8,6 +8,7 @@ import Mapview from "../pages/Mapview.vue";
 import SelectBoard from "../components/board/SelectBoard.vue";
 import SelectBoardByNo from "../components/board/SelectBoardByNo.vue";
 import InsertBoard from "../components/board/InsertBoard.vue";
+import Intro from "../pages/Intro.vue";
 
 import { SessionStorage } from "quasar";
 
@@ -56,6 +57,10 @@ const routes = [
         path: "/BoardList",
         name: "BoardList",
         component: SelectBoard
+      },
+      {
+        path: "/intro",
+        component: Intro
       }
     ]
   },

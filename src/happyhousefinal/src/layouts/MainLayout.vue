@@ -13,6 +13,7 @@
             class="hver"
             flat
             text-color="#666666"
+            @click="intro"
             label="소개"
             style="font-weight:800; margin-right:30px"
           >
