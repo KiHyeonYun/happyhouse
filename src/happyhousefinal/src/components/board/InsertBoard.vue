@@ -1,86 +1,84 @@
 <template>
-  <div class="container">
-    <h3>글 쓰기</h3>
-    <br />
-    <div v-if="!submitted">
-      <form
-        action
-        method="post"
-        id="_frmForm"
-        name="frmForm"
-        @submit.prevent="writeArticle"
-      >
-        <table class="table">
-          <tr>
-            <th>작성자</th>
-            <td>
-              <b-form-select
-                style="width:30%"
-                v-model="writer"
-                :options="writers"
-              ></b-form-select>
-            </td>
-          </tr>
-          <tr>
-            <th>제목</th>
-            <td>
-              <b-form-input
-                data-msg="제목"
-                type="text"
-                name="title"
-                id="_title"
-                size="20"
-                v-model="title"
-                style="width:30%"
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td>
-              <b-textarea
-                style="white-space:preline"
-                cols="50"
-                rows="10"
-                data-msg="내용"
-                type="textarea"
-                name="content"
-                id="_content"
-                v-model="content"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" style="height:50px; text-align:center;">
-              <b-button
-                size="lg"
-                pill
-                variant="outline-success"
-                type="submit"
-                name="button"
-                >작성</b-button
-              >
-            </td>
-          </tr>
-        </table>
-      </form>
-    </div>
+  <div class=" container fit row justify-center items-center content-center">
+    <div class="items-center q-pa-lg" style="width: 700px;">
+      <h6><strong>공지사항 작성</strong></h6>
+      <br />
+      <div v-if="!submitted">
+        <q-form @submit="writeArticle" class="q-gutter-md">
+          <q-input
+            bottom-slots
+            v-model="writername"
+            label="이름"
+            counter
+            style="width:100%"
+            readonly
+          >
+            <template v-slot:prepend>
+              <q-icon name="perm_identity"></q-icon>
+            </template>
+          </q-input>
 
-    <div v-else>
-      <br />
-      <h4 v-text="successMsg"></h4>
-      <br />
-      <b-button pill variant="outline-success" v-on:click="newWriteArticle">
-        글 추가 작성
-      </b-button>
-      <b-button pill variant="outline-primary" @click="boardList">
-        리스트로 돌아가기
-      </b-button>
+          <q-input
+            type="address"
+            bottom-slots
+            v-model="title"
+            label="제목"
+            counter
+            style="width:100%"
+            lazy-rules
+            :rules="[val => (val && val.length > 0) || 'Please type something']"
+          >
+            <template v-slot:prepend>
+              <q-icon name="title"></q-icon>
+            </template>
+            <template v-slot:append>
+              <q-icon
+                name="close"
+                @click="title = ''"
+                class="cursor-pointer"
+              ></q-icon>
+            </template>
+          </q-input>
+          <q-input
+            v-model="content"
+            filled
+            clearable
+            type="textarea"
+            color="primary"
+            style="white-space:preline"
+            cols="200"
+            rows="10"
+            label="공지사항 내용을 입력해주세요."
+            :shadow-text="textareaShadowText"
+            @keydown="processTextareaFill"
+            @focus="processTextareaFill"
+          />
+          <q-btn style="margin-right: 10px;" color="primary" type="submit"
+            >작성</q-btn
+          >
+        </q-form>
+      </div>
+
+      <div v-else>
+        <br />
+        <h4 v-text="successMsg"></h4>
+        <br />
+        <q-btn
+          style="margin-right: 10px;"
+          color="primary"
+          v-on:click="newWriteArticle"
+          >글 추가 작성</q-btn
+        >
+        <q-btn style="margin-right: 10px;" color="primary" @click="boardList"
+          >리스트로 돌아가기</q-btn
+        >
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import routes from "src/router/routes";
 export default {
   name: "InsertBoard",
   data() {
@@ -88,7 +86,8 @@ export default {
       info: null,
       loading: true,
       errored: false,
-      writer: "",
+      writername: "관리자",
+      writer: "admin",
       title: "",
       content: "",
       writers: [],
@@ -146,7 +145,99 @@ export default {
     },
 
     boardList: function() {
-      location.href = "/BoardList";
+      this.$router.push("/BoardList");
+    },
+    processInputFill(e) {
+      if (e === void 0) {
+        return;
+      }
+
+      if (e.keyCode === 27) {
+        if (this.inputFillCancelled !== true) {
+          this.inputFillCancelled = true;
+        }
+      } else if (e.keyCode === 9) {
+        if (
+          this.inputFillCancelled !== true &&
+          this.inputShadowText.length > 0
+        ) {
+          stopAndPrevent(e);
+          this.inputModel =
+            (typeof this.inputModel === "string" ? this.inputModel : "") +
+            this.inputShadowText;
+        }
+      } else if (this.inputFillCancelled === true) {
+        this.inputFillCancelled = false;
+      }
+    },
+
+    processTextareaFill(e) {
+      if (e === void 0) {
+        return;
+      }
+
+      if (e.keyCode === 27) {
+        if (this.textareaFillCancelled !== true) {
+          this.textareaFillCancelled = true;
+        }
+      } else if (e.keyCode === 9) {
+        if (
+          this.textareaFillCancelled !== true &&
+          this.textareaShadowText.length > 0
+        ) {
+          stopAndPrevent(e);
+          this.textareaModel =
+            (typeof this.textareaModel === "string" ? this.textareaModel : "") +
+            this.textareaShadowText;
+        }
+      } else if (this.textareaFillCancelled === true) {
+        this.textareaFillCancelled = false;
+      }
+    }
+  },
+  computed: {
+    inputShadowText() {
+      if (this.inputFillCancelled === true) {
+        return "";
+      }
+
+      const t = "Text filled when you press TAB";
+      const empty =
+        typeof this.inputModel !== "string" || this.inputModel.length === 0;
+
+      if (empty === true) {
+        return t;
+      } else if (t.indexOf(this.inputModel) !== 0) {
+        return "";
+      }
+
+      return t
+        .split(this.inputModel)
+        .slice(1)
+        .join(this.inputModel);
+    },
+
+    textareaShadowText() {
+      if (this.textareaFillCancelled === true) {
+        return "";
+      }
+
+      const t = "<<\nwill be filled\non multiple lines\nwhen you press TAB",
+        empty =
+          typeof this.textareaModel !== "string" ||
+          this.textareaModel.length === 0;
+
+      if (empty === true) {
+        return t.split("\n")[0];
+      } else if (t.indexOf(this.textareaModel) !== 0) {
+        return "";
+      }
+
+      return t
+        .split(this.textareaModel)
+        .slice(1)
+        .join(this.textareaModel)
+        .split("\n")[0];
     }
   }
 };

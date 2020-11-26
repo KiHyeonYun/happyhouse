@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.model.CommDto;
 import com.ssafy.happyhouse.model.CoronaDto;
 import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.service.MapService;
@@ -24,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 public class MapController {
-	private static final Logger logger = LoggerFactory.getLogger(EnvironmentController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 	
@@ -58,6 +59,15 @@ public class MapController {
 			logger.debug("병원 또는 클리닉 - 호출  : "+ map);
 			
 			return new ResponseEntity<List<CoronaDto>>(mapService.getCoronaList(map),HttpStatus.OK);
+		}
+	//select 
+	 
+	 @ApiOperation(value = "상권정보 list를 반환한다.", response = List.class)
+		@GetMapping(value = "/map/comm/{dong}")
+		public ResponseEntity<List<CommDto>> commList(@PathVariable("dong") String dong) throws Exception {
+			logger.debug("상권 정보 호출 : "+ dong);
+			
+			return new ResponseEntity<List<CommDto>>(mapService.getCommList(dong),HttpStatus.OK);
 		}
 	//select 
 	 

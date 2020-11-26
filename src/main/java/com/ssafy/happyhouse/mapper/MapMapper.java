@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssafy.happyhouse.model.CommDto;
 import com.ssafy.happyhouse.model.CoronaDto;
 import com.ssafy.happyhouse.model.HouseDto;
 
@@ -15,5 +16,6 @@ public interface MapMapper {
 	public List<HouseDto> getHouseListDong(String keyword) throws Exception;
 	public List<HouseDto> getHouseListName(String keyword) throws Exception;
 	public List<CoronaDto> getCoronaList(Map<String, String> map) throws Exception;
+	public List<CommDto> getCommList(String dong)throws Exception;
 	
 }

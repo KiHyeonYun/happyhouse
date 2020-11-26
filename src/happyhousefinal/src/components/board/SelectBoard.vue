@@ -1,140 +1,147 @@
 <template>
-  <div class="container">
-    <h3>글 목록</h3>
-    <br />
+  <div class=" container fit row justify-center items-center content-center">
+    <div class="items-center q-pa-lg" style="width: 1400px;">
+      <h6><strong>공지사항</strong></h6>
+      <q-table
+        :data="articles"
+        :columns="columns"
+        row-key="name"
+        :pagination.sync="pagination"
+        :filter="filter"
+      >
+        <template v-slot:header="props">
+          <q-tr :props="props">
+            <q-th auto-width />
+            <q-th v-for="col in props.cols" :key="col.name" :props="props">
+              <strong>{{ col.label }}</strong>
+            </q-th>
+          </q-tr>
+        </template>
 
-    <b-row>
-      <b-col lg="2" class="my-1">
-        <b-button variant="outline-success" href="/write">글쓰기</b-button>
-      </b-col>
-      <b-col lg="7" class="my-1">
-        <b-form-group
-          label-cols-sm="6"
-          label-align-sm="right"
-          label-size="sm"
-          description="아무것도 선택하지 않으면 모든 컬럼에서 검색합니다."
-          class="mb-0"
-        >
-          <b-form-checkbox-group v-model="filterOn" class="mt-1">
-            <b-form-checkbox value="no">번호</b-form-checkbox>
-            <b-form-checkbox value="writer">작성자</b-form-checkbox>
-            <b-form-checkbox value="title">제목</b-form-checkbox>
-            <b-form-checkbox value="content">내용</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-      </b-col>
+        <template v-slot:top>
+          <q-btn
+            v-show="admincheck"
+            color="primary"
+            :disable="loading"
+            label="글쓰기"
+            @click="insertBoard"
+          />
+          <q-space />
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            color="primary"
+            v-model="filter"
+            placeholder="search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+        <!-- 상세내용 -->
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td auto-width>
+              <q-btn
+                size="sm"
+                color="accent"
+                round
+                dense
+                @click="props.expand = !props.expand"
+                :icon="props.expand ? 'remove' : 'add'"
+              />
+            </q-td>
+            <q-td v-for="col in props.cols" :key="col.name" :props="props">
+              {{ col.value }}
+            </q-td>
+          </q-tr>
+          <q-tr v-show="props.expand" :props="props">
+            <q-td colspan="100%">
+              <div class="text-left">
+                <!--여기에 공지사항 이미지 들어갈거임-->
+                {{ props.row.content }}
+              </div>
 
-      <b-col lg="3" class="my-1">
-        <b-form-group>
-          <b-input-group size="sm">
-            <b-form-input
-              v-model="filter"
-              type="search"
-              id="filterInput"
-              placeholder="Type to Search"
-            ></b-form-input>
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''"
-                >Clear</b-button
-              >
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-    </b-row>
-    <b-table
-      striped
-      hover
-      :items="articles"
-      :fields="fields"
-      :per-page="perPage"
-      :current-page="currentPage"
-      :filter="filter"
-      :filter-included-fields="filterOn"
-      @filtered="onFiltered"
-    >
-      <template #cell(show_details)="row">
-        <b-button
-          variant="outline-info"
-          size="sm"
-          @click="row.toggleDetails"
-          class="mr-2"
-        >
-          {{ row.detailsShowing ? "Hide" : "Show" }} Detail
-        </b-button>
-      </template>
-
-      <template #row-details="row">
-        <b-card>
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-lg-right"><b>내용 : </b></b-col>
-          </b-row>
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-sm-right"></b-col>
-            <b-col>{{ row.item.content }}</b-col>
-          </b-row>
-          <b-row align-h="between">
-            <b-col cols="auto" class="mr-auto p-3"
-              ><b-button
-                pill
-                variant="outline-success"
-                @click="detailArticle(row.item.no)"
-                >수정</b-button
-              ></b-col
-            >
-            <b-col cols="auto" class="p-3"
-              ><b-button
-                pill
-                variant="outline-danger "
-                @click="deleteArticle(row.item.no)"
-                >삭제</b-button
-              ></b-col
-            >
-          </b-row>
-        </b-card>
-      </template>
-    </b-table>
-    <br />
-    <div class="container text-center">
-      <b-pagination
-        align="center"
-        v-model="currentPage"
-        pills
-        :total-rows="totalRows"
-        :per-page="perPage"
-      ></b-pagination>
+              <div class="text-right" v-show="admincheck">
+                <q-btn
+                  style="margin-right: 10px;"
+                  color="green"
+                  @click="detailArticle(props.row.no)"
+                  >수정</q-btn
+                >
+                <q-btn color="red" @click="deleteArticle(props.row.no)"
+                  >삭제</q-btn
+                >
+              </div>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
     </div>
   </div>
 </template>
 
 <script>
+import { SessionStorage } from "quasar";
 import axios from "axios";
-
-// Optionally install the BootstrapVue icon components plugin
-
 export default {
   name: "BoardList",
   data() {
     return {
-      fields: [
-        { key: "no", label: "글 번호", sortable: true },
-        { key: "writer", label: "글쓴이", sortable: true },
-        { key: "title", label: "제목", sortable: true },
-        { key: "regtime", label: "쓴 시간", sortable: true },
-        { key: "show_details", label: "자세히" }
+      pagination: {
+        sortBy: "desc",
+        descending: false,
+        page: 1,
+        rowsPerPage: 10
+        // rowsNumber: xx if getting data from a server
+      },
+      columns: [
+        {
+          name: "title",
+          required: true,
+          label: "제목",
+          align: "left",
+          field: row => row.title,
+          format: val => `${val}`,
+          sortable: true
+        },
+        {
+          name: "writer",
+          align: "center",
+          label: "글쓴이",
+          field: "writer",
+          sortable: true
+        },
+        {
+          name: "no",
+          label: "번호",
+          field: "no",
+          sortable: true,
+          style: "width: 10px"
+        },
+        {
+          name: "regtime",
+          label: "작성 시간",
+          sortable: true,
+          field: "regtime"
+        }
       ],
-      upHere: false,
       articles: [],
-      totalRows: 1,
-      perPage: 8,
-      currentPage: 1,
       filter: null,
-      filterOn: [],
       loading: true,
-      errored: false
+      errored: false,
+      admincheck: false
     };
   },
   methods: {
+    isAdmin() {
+      if (SessionStorage.getItem("userId") == "admin") this.admincheck = true;
+    },
+    insertBoard() {
+      this.$router.push("/write");
+    },
     detailArticle(did) {
       this.$router.push("/detail/" + did);
     },
@@ -174,27 +181,12 @@ export default {
       this.currentPage = 1;
     }
   },
-
   mounted() {
+    this.isAdmin();
     this.retrieveBoard();
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<style scoped></style>

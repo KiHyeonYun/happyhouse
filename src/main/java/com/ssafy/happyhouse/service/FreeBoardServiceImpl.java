@@ -47,7 +47,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Transactional
 	public boolean deleteBoard(int no) {
 		if( freeBoardMapper.deleteBoard(no) == 1) {
-			freeBoardMapper.reSortNo();
+			//freeBoardMapper.reSortNo();
 			return true;
 		}
 		return false;

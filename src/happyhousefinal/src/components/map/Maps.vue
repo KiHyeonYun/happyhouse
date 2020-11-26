@@ -64,9 +64,17 @@ export default {
       curDong: "", //
       hospFlag: "", // = false;
       cliFlag: "", // = false;
-      commicon: "", // 환경정보
+      commicon: "", // 상권정보
       commMarkers: [],
-      commflag: ""
+      commflag: "",
+      sport: "",
+      tourism: "",
+      edu: "",
+      realestate: "",
+      food: "",
+      lodgment: "",
+      lifeService: "",
+      commi: ""
     };
   },
 
@@ -139,7 +147,7 @@ export default {
               avglng /= this.hospMarkers.length;
 
               this.map.setCenter(new kakao.maps.LatLng(avglat, avglng));
-              this.map.setLevel(6);
+              this.map.setLevel(4);
             })
             .catch(() => {});
         }
@@ -202,7 +210,7 @@ export default {
               avglng /= this.cliMarkers.length;
 
               this.map.setCenter(new kakao.maps.LatLng(avglat, avglng));
-              this.map.setLevel(6);
+              this.map.setLevel(4);
             })
             .catch(() => {});
         }
@@ -210,68 +218,85 @@ export default {
     },
 
     commInfo() {
+      var avglat = 0.0;
+      var avglng = 0.0;
       if (this.commflag) {
-        while (this.commMarkers.length > 0) {
-          this.commMarkers.pop().setMap(null);
-        }
+        while (this.commMarkers.length > 0) this.commMarkers.pop().setMap(null);
         this.commflag = false;
       } else {
-        //this.guMethod(this.curGungu);
-        var geocoder = new kakao.maps.services.Geocoder();
-        //alert(this.commList[1].WRKP_ADDR);
-        var tmpDong = this.curDong;
-        var tmp;
-
-        var map2 = this.map;
-        var commMarkers2 = this.commMarkers;
-        var icons = this.commicon;
-
-        this.commList.forEach(function(element) {
-          if (element.WRKP_ADDR != "") {
-            geocoder.addressSearch(element.WRKP_ADDR, function(result, status) {
-              if (status === kakao.maps.services.Status.OK) {
-                if (tmpDong == result[0].address.region_3depth_name) {
-                  tmp = new kakao.maps.Marker({
-                    position: new kakao.maps.LatLng(
-                      parseFloat(result[0].y),
-                      parseFloat(result[0].x)
-                    ),
-                    //image: this.commicon,
-                    //content: '<div>카카오</div>',
-                    image: icons
-                  });
-                  //
-                  var infowindow = new kakao.maps.InfoWindow({
-                    content:
-                      "<div>" +
-                      element.WRKP_NM +
-                      "</div>" +
-                      "<div>" +
-                      element.UPCH_COB_NM +
-                      "</div>" // 인포윈도우에 표시할 내용
-                  });
-
-                  kakao.maps.event.addListener(
-                    tmp,
-                    "mouseover",
-                    this.makeOverListener(this.map, tmp, infowindow)
-                  );
-                  kakao.maps.event.addListener(
-                    tmp,
-                    "mouseout",
-                    this.makeOutListener(infowindow)
-                  );
-                  //
-                  tmp.setMap(map2);
-                  commMarkers2.push(tmp);
-                }
+        axios
+          .get(process.env.VUE_APP_SERVER_URL + "/map/comm/" + this.curDong)
+          .then(response => {
+            var tmp;
+            response.data.forEach(vo => {
+              if (vo.bigClass == "음식") {
+                this.commicon = this.food;
+              } else if (vo.bigClass == "소매") {
+                this.commicon = this.commi;
+              } else if (vo.bigClass == "생활서비스") {
+                this.commicon = this.lifeService;
+              } else if (vo.bigClass == "학문/교육") {
+                this.commicon = this.edu;
+              } else if (vo.bigClass == "관광/여가/오락") {
+                this.commicon = this.tourism;
+              } else if (vo.bigClass == "부동산") {
+                this.commicon = this.realestate;
+              } else if (vo.bigClass == "숙박") {
+                this.commicon = this.lodgment;
+              } else if (vo.bigClass == "스포츠") {
+                this.commicon = this.sport;
+              } else {
+                this.commicon = this.commi;
               }
-            });
-          }
-        });
+              tmp = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(
+                  parseFloat(vo.lat),
+                  parseFloat(vo.lng)
+                ),
 
-        this.commflag = true;
-        alert("final");
+                image: this.commicon
+              });
+
+              ////
+              var infowindow = new kakao.maps.InfoWindow({
+                content:
+                  "<div>" +
+                  vo.storeName +
+                  "</div>" +
+                  "<div>" +
+                  vo.bigClass +
+                  " " +
+                  "</div>" // 인포윈도우에 표시할 내용
+              });
+
+              kakao.maps.event.addListener(
+                tmp,
+                "mouseover",
+                this.makeOverListener(this.map, tmp, infowindow)
+              );
+              kakao.maps.event.addListener(
+                tmp,
+                "mouseout",
+                this.makeOutListener(infowindow)
+              );
+
+              avglat += parseFloat(vo.lat);
+              avglng += parseFloat(vo.lng);
+
+              tmp.setMap(this.map);
+              this.commMarkers.push(tmp);
+              //     this.map.setLevel(6);
+            });
+            this.commflag = true;
+            avglat /= this.commMarkers.length;
+            avglng /= this.commMarkers.length;
+
+            this.map.setCenter(new kakao.maps.LatLng(avglat, avglng));
+            this.map.setLevel(4);
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     },
 
@@ -303,8 +328,43 @@ export default {
         "https://cdn2.iconfinder.com/data/icons/jetflat-buildings/90/008_010_hospital_clinic_building-256.png",
         new kakao.maps.Size(40, 40)
       );
-      this.commicon = new kakao.maps.MarkerImage(
+      //소매
+      this.commi = new kakao.maps.MarkerImage(
         "https://cdn1.iconfinder.com/data/icons/travel-and-vacation-16/80/vector_825_18-256.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //숙박
+      this.lodgment = new kakao.maps.MarkerImage(
+        "https://cdn3.iconfinder.com/data/icons/needs-of-the-hotel/640/HOTEL-512.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //음식
+      this.food = new kakao.maps.MarkerImage(
+        "https://cdn4.iconfinder.com/data/icons/ios-web-user-interface-multi-circle-flat-vol-6/512/Food_fork_kitchen_knife_meanns_restaurant-256.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //생활서비스
+      this.lifeService = new kakao.maps.MarkerImage(
+        "https://cdn2.iconfinder.com/data/icons/occupations-people-scenes/64/mechanic-256.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //교육
+      this.edu = new kakao.maps.MarkerImage(
+        "https://cdn0.iconfinder.com/data/icons/business-finance-vol-5-11/512/9-512.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //관광 여가 오락
+      this.tourism = new kakao.maps.MarkerImage(
+        "https://cdn1.iconfinder.com/data/icons/set-4/76/tent-512.png",
+        new kakao.maps.Size(40, 40)
+      );
+      //부동산
+      this.realestate = new kakao.maps.MarkerImage(
+        "https://cdn3.iconfinder.com/data/icons/personal-business-finance-2/380/Home_Loan-256.png",
+        new kakao.maps.Size(40, 40)
+      );
+      this.sport = new kakao.maps.MarkerImage(
+        "https://cdn4.iconfinder.com/data/icons/sport-fitness-vol-01/512/01-football-soccor-sport-256.png",
         new kakao.maps.Size(40, 40)
       );
     },
@@ -323,6 +383,10 @@ export default {
       while (this.cliMarkers.length > 0) {
         this.cliMarkers.pop().setMap(null);
         this.cliFlag = false;
+      }
+      while (this.commMarkers.length > 0) {
+        this.commMarkers.pop().setMap(null);
+        this.commflag = false;
       }
       if (this.marker != null) this.marker.setMap(null);
 
@@ -396,6 +460,10 @@ export default {
         this.cliMarkers.pop().setMap(null);
         this.cliFlag = false;
       }
+      while (this.commMarkers.length > 0) {
+        this.commMarkers.pop().setMap(null);
+        this.commflag = false;
+      }
       if (this.marker != null) this.marker.setMap(null);
 
       this.marker = new kakao.maps.Marker({
@@ -435,15 +503,9 @@ export default {
 
   watch: {
     apt: function(newVal, oldVal) {
-      while (this.commMarkers.length > 0) {
-        this.commMarkers.pop().setMap(null);
-      }
       this.addMarkersSeleted(newVal);
     },
     aptlist: function(newVal, oldVal) {
-      while (this.commMarkers.length > 0) {
-        this.commMarkers.pop().setMap(null);
-      }
       this.addMarkersAll(newVal);
     }
   }

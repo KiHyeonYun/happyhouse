@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.mapper.MapMapper;
+import com.ssafy.happyhouse.model.CommDto;
 import com.ssafy.happyhouse.model.CoronaDto;
 import com.ssafy.happyhouse.model.HouseDto;
 
@@ -41,6 +42,12 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public List<CoronaDto> getCoronaList(Map<String, String> map) throws Exception {  //getCoronaList
 		return sqlSession.getMapper(MapMapper.class).getCoronaList(map);
+	}
+
+	@Override
+	public List<CommDto> getCommList(String dong) throws Exception {
+		
+		return sqlSession.getMapper(MapMapper.class).getCommList(dong);
 	}
 	
 	

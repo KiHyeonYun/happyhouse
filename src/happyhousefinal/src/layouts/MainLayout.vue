@@ -104,16 +104,15 @@
     <!-- 중앙 child view 끝 -->
 
     <!-- 푸터 시작 -->
-    <!-- <q-footer reveal elevated class="bg-grey-8 text-white">
+    <!-- <q-footer reveal elevated class="bg-white text-black">
       <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img
-              src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
-            /> </q-avatar
-          >Title
-        </q-toolbar-title>
-      </q-toolbar>
+        <div>
+          <strong style="height=50px; font-size:15px;"
+            >YunKihyeon & LeeSumin All rights reserved.</strong
+          >
+        </div>
+        <p></p
+      ></q-toolbar>
     </q-footer> -->
     <q-page-sticky position="top-right" :offset="[18, 18]">
       <q-btn round color="secondary" icon="maps_ugc" @click="chatOpen" />
