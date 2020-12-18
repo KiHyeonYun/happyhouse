@@ -10,21 +10,20 @@
 
 |환경|버전|설명|
 |:---:|:---:|:---:|
-|JAVA |1.8(zulu)|---|
-|SpringBoot |2.3.5|---|
-|swagger|2.9.2|---|
-|MySQL|8.0.21|---|
-|Mybatis|2.1.3|---|
+|JAVA |1.8(zulu)|자바 JDK|
+|SpringBoot |2.3.5|Spring Framework|
+|swagger|2.9.2|Rest API|
+|MySQL|8.0.21|DataBase|
+|Mybatis|2.1.3|spring, MySQL 연결|
 
 
 ## Front End 개발 환경
 
 |환경|버전|설명|
 |:---:|:---:|:---:|
-|Vue|2.6.12|---|
-|axios|0.21.0|---|
-|Bootstrap v4|2.19.0|---|
-|quasar|1.14|---|
+|Vue|2.6.12|SPA Framework|
+|axios|0.21.0|HTTP 통신|
+|quasar|1.14|Responsive Web Framework|
 
 
 
@@ -44,15 +43,40 @@
     * 회원관리(로그인, 로그아웃, 마이페이지) 작업 진행
     
 * 2020-11-23
-    * 지도 완성 예상
-    * 회원관리 완성 예상
-
+    * 지도 기본 기능 구현
+    * 회원관리 CRUD 구현
+    
+* 2020-11-24
+    * 지도 추가 기능 구현(환경정보)
+    * 회원관리 예외처리
+    * 게시판 기능 구현
+    
+* 2020-11-25
+    * 지도 마커 아이콘 변경 및 상가정보 추가
+    * 회원관리 예외처리 및 구현 완료
+    * 상담기능 추가
+    * 발표자료 완성
+    
+* 2020-11-26
+    * 발표
+    
 ## 정보
-
-
 > 윤기현 - [https://github.com/KiHyeonYun] <br/>
 > 이수민 - [https://github.com/] <br/>
 
 
-#
-X11 License 라이센스를 준수하며 ``LICENSE``에서 자세한 정보를 확인할 수 있습니다.
+## 실행
+```
+   npm install -g @quasar/cli
+   npm install
+   quasar dev 로 실행
+```
+
+   * 퀘이사에서 .env파일 오류가 난다면
+  [https://medium.com/carbono/using-env-file-in-quasar-apps-72b56909302f]
+
+## env 파일
+   ```
+   VUE_APP_SERVER_URL=http://localhost:8888/happyhouse
+   MAP_DATA_KEY=맵키(KAKAO)
+   ```
