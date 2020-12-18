@@ -47,7 +47,6 @@
           cols="200"
           rows="10"
           label="공지사항 내용을 입력해주세요."
-          :shadow-text="textareaShadowText"
           @keydown="processTextareaFill"
           @focus="processTextareaFill"
         />
@@ -67,7 +66,11 @@ export default {
   props: ["no"],
   data() {
     return {
-      upHere: false,
+      inputModel: "",
+      textareaModel: "",
+
+      inputFillCancelled: false,
+      textareaFillCancelled: false,
       article: {
         writer: "",
         no: "",
@@ -75,10 +78,13 @@ export default {
         content: "",
         regtime: ""
       },
+      upHere: false,
+
       loading: true,
       errored: false
     };
   },
+
   methods: {
     updateboard: function() {
       axios
@@ -151,51 +157,6 @@ export default {
         this.errored = true;
       })
       .finally(() => (this.loading = false));
-  }, //
-  computed: {
-    inputShadowText() {
-      if (this.inputFillCancelled === true) {
-        return "";
-      }
-
-      const t = "Text filled when you press TAB";
-      const empty =
-        typeof this.inputModel !== "string" || this.inputModel.length === 0;
-
-      if (empty === true) {
-        return t;
-      } else if (t.indexOf(this.inputModel) !== 0) {
-        return "";
-      }
-
-      return t
-        .split(this.inputModel)
-        .slice(1)
-        .join(this.inputModel);
-    },
-
-    textareaShadowText() {
-      if (this.textareaFillCancelled === true) {
-        return "";
-      }
-
-      const t = "<<\nwill be filled\non multiple lines\nwhen you press TAB",
-        empty =
-          typeof this.textareaModel !== "string" ||
-          this.textareaModel.length === 0;
-
-      if (empty === true) {
-        return t.split("\n")[0];
-      } else if (t.indexOf(this.textareaModel) !== 0) {
-        return "";
-      }
-
-      return t
-        .split(this.textareaModel)
-        .slice(1)
-        .join(this.textareaModel)
-        .split("\n")[0];
-    }
   }
 };
 </script>

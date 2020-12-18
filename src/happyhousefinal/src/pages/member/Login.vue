@@ -86,6 +86,11 @@ export default {
             SessionStorage.set("accessToken", `${response.data["auth-token"]}`);
             SessionStorage.set("userId", `${response.data["user-id"]}`);
             SessionStorage.set("userName", `${response.data["user-name"]}`);
+            if (SessionStorage.getItem("userId") == "admin") {
+              SessionStorage.set("admincheck", true);
+            } else {
+              SessionStorage.set("admincheck", false);
+            }
             this.$q.notify({
               color: "green-4",
               textColor: "white",

@@ -83,6 +83,11 @@ export default {
   name: "InsertBoard",
   data() {
     return {
+      inputModel: "",
+      textareaModel: "",
+
+      inputFillCancelled: false,
+      textareaFillCancelled: false,
       info: null,
       loading: true,
       errored: false,
@@ -139,7 +144,6 @@ export default {
         (this.info = null),
         (this.loading = true),
         (this.errored = false),
-        (this.writer = ""),
         (this.title = ""),
         (this.content = "");
     },

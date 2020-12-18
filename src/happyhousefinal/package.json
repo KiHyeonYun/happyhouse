@@ -15,8 +15,6 @@
     "bootstrap-vue": "^2.19.0",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
-    "vue-naver-map": "^0.3.6",
-    "vue-naver-maps": "^0.14.1",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {

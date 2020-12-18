@@ -177,7 +177,8 @@ export default {
       this.$router.push({ path: "/map/", params: { no: searchAddr } });
     },
     f_main() {
-      location.href = "/";
+      this.$router.push("/#");
+      // location.href = "/";
       // this.$router.push("/");
     },
     mypage() {
@@ -186,7 +187,7 @@ export default {
     logout() {
       SessionStorage.clear();
       this.loginok = false;
-      location.href = "/";
+      this.$router.push("/#");
     }
   }
 };

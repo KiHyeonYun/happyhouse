@@ -63,10 +63,8 @@
         <div class="col" style="margin-left:20px">
           <q-carousel
             style="height:780px; border-radius: 13px;"
-            animated
             v-model="slide2"
             infinite
-            :autoplay="autoplay2"
             arrows
             navigation
             transition-prev="slide-right"

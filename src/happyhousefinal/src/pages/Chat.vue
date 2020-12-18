@@ -14,7 +14,7 @@
           @keyup.enter="putChat"
         >
           <template v-slot:append>
-            <q-btn round flat icon="send" />
+            <q-btn round flat icon="send" @click="putChat" />
           </template>
         </q-input>
       </div>
@@ -99,11 +99,10 @@ export default {
       }
     }
   },
-
   mounted() {
     setInterval(() => {
       this.getChat();
-    }, 1113500);
+    }, 5000);
   }
 };
 </script>

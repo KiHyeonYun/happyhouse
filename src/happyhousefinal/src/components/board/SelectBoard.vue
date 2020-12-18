@@ -132,12 +132,15 @@ export default {
       filter: null,
       loading: true,
       errored: false,
-      admincheck: false
+      admincheck: SessionStorage.getItem("admincheck")
     };
   },
   methods: {
     isAdmin() {
-      if (SessionStorage.getItem("userId") == "admin") this.admincheck = true;
+      if (SessionStorage.getItem("userId") == "admin") {
+        this.admincheck = true;
+        SessionStorage.set("admincheck", true);
+      }
     },
     insertBoard() {
       this.$router.push("/write");
@@ -174,11 +177,6 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
-    },
-    onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
     }
   },
   mounted() {
