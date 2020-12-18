@@ -62,7 +62,7 @@
     
 ## 정보
 > 윤기현 - [https://github.com/KiHyeonYun] <br/>
-> 이수민 - [https://github.com/] <br/>
+> 이수민 - [https://github.com/leesuuuuumm] <br/>
 
 
 ## 실행
